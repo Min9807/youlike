@@ -1,6 +1,45 @@
 <html>
 
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+
+    <script>
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            newestOnTop: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            timeOut: "5000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+
+        function toastNotice(msg) {
+            toastr["success"](msg, "알림");
+        }
+
+        function toastWarning(msg) {
+            toastr["warning"](msg, "알림");
+        }
+    </script>
+
     <style>
         @font-face {
             font-family: 'GmarketSansMedium';
@@ -28,14 +67,14 @@
 
         form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-        if ( form.username.value.length == 0 ) {
-            alert('아이디를 입력해주세요.');
+        if (form.username.value.length == 0) {
+            toastWarning('아이디를 입력해주세요.');
             form.username.focus();
             return;
         }
 
-        if ( form.username.value.length < 4 ) {
-            alert('아이디를 4자 이상 입력해주세요.');
+        if (form.username.value.length < 4) {
+            toastWarning('아이디를 4자 이상 입력해주세요.');
             form.username.focus();
             return;
         }
@@ -44,14 +83,14 @@
 
         form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-        if ( form.password.value.length == 0 ) {
+        if (form.password.value.length == 0) {
             form.password.focus();
-            alert('비밀번호를 입력해주세요.');
+            toastWarning('비밀번호를 입력해주세요.');
             return;
         }
 
-        if ( form.password.value.length < 4 ) {
-            alert('비밀번호를 4자 이상 입력해주세요.');
+        if (form.password.value.length < 4) {
+            toastWarning('비밀번호를 4자 이상 입력해주세요.');
             form.password.focus();
             return;
         }
