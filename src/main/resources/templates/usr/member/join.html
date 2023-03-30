@@ -1,115 +1,62 @@
-<html>
+<html layout:decorate="~{usr/layout/layout.html}">
 
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
-
-    <script>
-        toastr.options = {
-            closeButton: true,
-            debug: false,
-            newestOnTop: true,
-            progressBar: true,
-            positionClass: "toast-top-right",
-            preventDuplicates: false,
-            onclick: null,
-            showDuration: "300",
-            hideDuration: "1000",
-            timeOut: "5000",
-            extendedTimeOut: "1000",
-            showEasing: "swing",
-            hideEasing: "linear",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut"
-        };
-
-        function toastNotice(msg) {
-            toastr["success"](msg, "알림");
-        }
-
-        function toastWarning(msg) {
-            toastr["warning"](msg, "알림");
-        }
-    </script>
-
-    <style>
-        @font-face {
-            font-family: 'GmarketSansMedium';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        html > body {
-            font-family: "GmarketSansMedium";
-            text-underline-position: under;
-        }
-    </style>
-
+    <title>회원가입</title>
 </head>
 
 <body>
 
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<main layout:fragment="main">
+    <script>
+        function JoinForm__submit(form) {
+            // username 이(가) 올바른지 체크
 
-<script>
-    function JoinForm__submit(form) {
-        // username 이(가) 올바른지 체크
+            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-        form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+            if (form.username.value.length == 0) {
+                toastWarning('아이디를 입력해주세요.');
+                form.username.focus();
+                return;
+            }
 
-        if (form.username.value.length == 0) {
-            toastWarning('아이디를 입력해주세요.');
-            form.username.focus();
-            return;
+            if (form.username.value.length < 4) {
+                toastWarning('아이디를 4자 이상 입력해주세요.');
+                form.username.focus();
+                return;
+            }
+
+            // password 이(가) 올바른지 체크
+
+            form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+
+            if (form.password.value.length == 0) {
+                form.password.focus();
+                toastWarning('비밀번호를 입력해주세요.');
+                return;
+            }
+
+            if (form.password.value.length < 4) {
+                toastWarning('비밀번호를 4자 이상 입력해주세요.');
+                form.password.focus();
+                return;
+            }
+
+            form.submit(); // 폼 발송
         }
+    </script>
 
-        if (form.username.value.length < 4) {
-            toastWarning('아이디를 4자 이상 입력해주세요.');
-            form.username.focus();
-            return;
-        }
-
-        // password 이(가) 올바른지 체크
-
-        form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
-
-        if (form.password.value.length == 0) {
-            form.password.focus();
-            toastWarning('비밀번호를 입력해주세요.');
-            return;
-        }
-
-        if (form.password.value.length < 4) {
-            toastWarning('비밀번호를 4자 이상 입력해주세요.');
-            form.password.focus();
-            return;
-        }
-
-        form.submit(); // 폼 발송
-    }
-</script>
-
-<form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
-    <div>
-        <input type="text" name="username" maxlength="30" placeholder="아이디" class="input input-bordered">
-    </div>
-    <div>
-        <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
-    </div>
-    <div>
-        <input type="submit" value="회원가입" class="btn btn-primary">
-    </div>
-</form>
+    <form th:action method="POST" className="p-10 flex flex-col gap-4" onSubmit="JoinForm__submit(this); return false;">
+        <div>
+            <input type="text" name="username" maxLength="30" placeholder="아이디" className="input input-bordered">
+        </div>
+        <div>
+            <input type="password" name="password" maxLength="30" placeholder="비밀번호" className="input input-bordered">
+        </div>
+        <div>
+            <input type="submit" value="회원가입" className="btn btn-primary">
+        </div>
+    </form>
+</main>
 
 </body>
 

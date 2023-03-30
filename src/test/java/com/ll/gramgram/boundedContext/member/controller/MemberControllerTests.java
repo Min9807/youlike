@@ -139,4 +139,28 @@ public class MemberControllerTests {
                 .andExpect(handler().methodName("join"))
                 .andExpect(status().is4xxClientError());
     }
+
+    @Test
+    @DisplayName("로그인 폼")
+    void t004() throws Exception {
+        // WHEN
+        ResultActions resultActions = mvc
+                .perform(get("/member/login"))
+                .andDo(print());
+
+        // THEN
+        resultActions
+                .andExpect(handler().handlerType(MemberController.class))
+                .andExpect(handler().methodName("showLogin"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(containsString("""
+                        <input type="text" name="username"
+                        """.stripIndent().trim())))
+                .andExpect(content().string(containsString("""
+                        <input type="password" name="password"
+                        """.stripIndent().trim())))
+                .andExpect(content().string(containsString("""
+                        <input type="submit" value="로그인"
+                        """.stripIndent().trim())));
+    }
 }
