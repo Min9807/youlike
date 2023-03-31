@@ -1,0 +1,67 @@
+<html layout:decorate="~{usr/layout/layout.html}">
+
+<head>
+    <title>본인의 인스타그램 정보입력</title>
+</head>
+
+<body>
+
+<main layout:fragment="main">
+    <script>
+        function ConnectForm__submit(form) {
+            // username 이(가) 올바른지 체크
+
+            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+
+            if (form.username.value.length == 0) {
+                toastWarning('인스타그램 아이디를 입력해주세요.');
+                form.username.focus();
+                return;
+            }
+
+            if (form.username.value.length < 4) {
+                toastWarning('인스타그램 아이디를 4자 이상 입력해주세요.');
+                form.username.focus();
+                return;
+            }
+
+            const $checkedGenderRadioButton = $(form).find("[name=gender]:checked");
+
+            if ($checkedGenderRadioButton.length == 0) {
+                toastWarning('성별을 선택해주세요.');
+                $(form).find("[name=gender]:first").focus();
+                return;
+            }
+
+            form.submit(); // 폼 발송
+        }
+    </script>
+
+    <form th:action method="POST" class="p-10 max-w-sm flex flex-col gap-4"
+          onsubmit="ConnectForm__submit(this); return false;">
+        <div>
+            <input type="text" name="username" autocomplete="off" maxlength="30" placeholder="인스타그램 아이디"
+                   class="input input-bordered">
+        </div>
+        <div>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text">남자</span>
+                    <input type="radio" name="gender" value="M" class="radio focus:bg-red-100">
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text">여자</span>
+                    <input type="radio" name="gender" value="W" class="radio focus:bg-red-100">
+                </label>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="정보입력" class="btn btn-primary">
+        </div>
+    </form>
+</main>
+</body>
+
+</html>
