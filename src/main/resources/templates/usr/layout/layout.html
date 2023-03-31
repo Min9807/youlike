@@ -12,47 +12,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
   <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
-  <script>
-    toastr.options = {
-      closeButton: true,
-      debug: false,
-      newestOnTop: true,
-      progressBar: true,
-      positionClass: "toast-top-right",
-      preventDuplicates: false,
-      onclick: null,
-      showDuration: "300",
-      hideDuration: "1000",
-      timeOut: "5000",
-      extendedTimeOut: "1000",
-      showEasing: "swing",
-      hideEasing: "linear",
-      showMethod: "fadeIn",
-      hideMethod: "fadeOut"
-    };
-
-    function toastNotice(msg) {
-      toastr["success"](msg, "알림");
-    }
-
-    function toastWarning(msg) {
-      toastr["warning"](msg, "알림");
-    }
-  </script>
-
-  <style>
-    @font-face {
-      font-family: 'GmarketSansMedium';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    html > body {
-      font-family: "GmarketSansMedium";
-      text-underline-position: under;
-    }
-  </style>
+  <script src="/resource/common/common.js"></script>
+  <link rel="stylesheet" href="/resource/common/common.css">
 
 </head>
 
@@ -89,3 +50,4 @@
 </body>
 
 </html>
+
