@@ -62,11 +62,15 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <header>
+  <a href="/" class="btn btn-link">메인</a>
   <a href="/member/login" sec:authorize="isAnonymous()" class="btn btn-link">로그인</a>
   <a href="/member/join" sec:authorize="isAnonymous()" class="btn btn-link">회원가입</a>
+  <a href="/member/me" sec:authorize="isAuthenticated()" class="btn btn-link">내 정보</a>
   <a href="javascript:;" sec:authorize="isAuthenticated()" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
   <form sec:authorize="isAuthenticated()" hidden th:action="|/member/logout|" method="POST"></form>
   <span sec:authorize="isAuthenticated()" th:text="|${#authentication.principal.username}님 환영합니다.|"></span>
+  <span sec:authorize="isAuthenticated()">당신의 회원번호는 [[${loginedMember.id}]]번입니다.</span>
+  <span sec:authorize="isAuthenticated()">당신은 [[${loginedMember.createDate}]]에 가입하셨습니다.</span>
 </header>
 
 <main layout:fragment="main"></main>
