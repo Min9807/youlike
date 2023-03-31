@@ -2,7 +2,7 @@
 
 <head>
 
-  <meta charSet="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -23,11 +23,11 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <header>
-  <a href="/" className="btn btn-link">메인</a>
-  <a href="/member/login" th:if="${@rq.logout}" className="btn btn-link">로그인</a>
-  <a href="/member/join" th:if="${@rq.logout}" className="btn btn-link">회원가입</a>
-  <a href="/member/me" th:if="${@rq.login}" className="btn btn-link">내 정보</a>
-  <a href="javascript:;" th:if="${@rq.login}" onClick="$(this).next().submit();" className="btn btn-link">로그아웃</a>
+  <a href="/" class="btn btn-link">메인</a>
+  <a href="/member/login" th:if="${@rq.logout}" class="btn btn-link">로그인</a>
+  <a href="/member/join" th:if="${@rq.logout}" class="btn btn-link">회원가입</a>
+  <a href="/member/me" th:if="${@rq.login}" class="btn btn-link">내 정보</a>
+  <a href="javascript:;" th:if="${@rq.login}" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
   <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
   <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
 </header>
@@ -51,7 +51,7 @@
   $(window).bind("pageshow", function (event) {
     const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
 
-    if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+    if ( localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg) ) {
       toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
       localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
     }
@@ -61,3 +61,4 @@
 </body>
 
 </html>
+
