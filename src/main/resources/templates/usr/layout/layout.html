@@ -65,7 +65,8 @@
   <a href="/member/login" sec:authorize="isAnonymous()" class="btn btn-link">로그인</a>
   <a href="/member/join" sec:authorize="isAnonymous()" class="btn btn-link">회원가입</a>
   <a href="javascript:;" sec:authorize="isAuthenticated()" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
-  <form th:action="|/member/logout|" method="POST"></form>
+  <form sec:authorize="isAuthenticated()" hidden th:action="|/member/logout|" method="POST"></form>
+  <span sec:authorize="isAuthenticated()" th:text="|${#authentication.principal.username}님 환영합니다.|"></span>
 </header>
 
 <main layout:fragment="main"></main>
