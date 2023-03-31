@@ -28,6 +28,6 @@ public class HomeController {
             sb.append(String.format("%s: %s\n", attributeName, attributeValue));
         }
 
-        return sb.toString();
+        return sb.toString().replaceAll("\n", "<br>");
     }
 }
