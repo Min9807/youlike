@@ -1,6 +1,9 @@
 package com.ll.gramgram.boundedContext.instaMember.controller;
 
 import com.ll.gramgram.base.rq.Rq;
+import com.ll.gramgram.base.rsData.RsData;
+import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
+import com.ll.gramgram.boundedContext.instaMember.service.InstaMemberService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class InstaMemberController {
     private final Rq rq;
+    private final InstaMemberService instaMemberService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/connect")
@@ -39,6 +43,8 @@ public class InstaMemberController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/connect")
     public String connect(@Valid ConnectForm connectForm) {
+        RsData<InstaMember> rsData = instaMemberService.connect(rq.getMember(), connectForm.getUsername(), connectForm.getGender());
+
         return rq.redirectWithMsg("/pop", "인스타그램 계정이 연결되었습니다.");
     }
 }
