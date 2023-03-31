@@ -1,0 +1,4 @@
+<script>
+    alert('해당 아이디(user1)는 이미 사용중입니다.');
+    history.back();
+</script>
