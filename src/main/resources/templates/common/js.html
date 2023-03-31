@@ -1,4 +1,9 @@
-<script>
-    alert('해당 아이디(user1)는 이미 사용중입니다.');
+<script th:inline="javascript">
+    const alertMsg = /*[[${alertMsg}]]*/ null;
+
+    if (alertMsg && alertMsg.trim().length > 0) {
+        alert(alertMsg.trim());
+    }
+
     history.back();
 </script>
