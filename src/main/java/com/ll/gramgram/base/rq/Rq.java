@@ -60,8 +60,10 @@ public class Rq {
     }
 
     public String historyBack(String msg) {
-        // model.addAttribute 와 같은 의미
-        req.setAttribute("alertMsg", msg);
+        String referer = req.getHeader("referer");
+        String key = "historyBackErrorMsg___" + referer;
+        req.setAttribute("localStorageKeyAboutHistoryBackErrorMsg", key);
+        req.setAttribute("historyBackErrorMsg", msg);
         return "common/js";
     }
 }
