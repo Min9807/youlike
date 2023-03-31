@@ -4,7 +4,6 @@ import com.ll.gramgram.base.rq.Rq;
 import com.ll.gramgram.base.rsData.RsData;
 import com.ll.gramgram.boundedContext.member.entity.Member;
 import com.ll.gramgram.boundedContext.member.service.MemberService;
-import com.ll.gramgram.standard.util.Ut;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,12 +12,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/member")
@@ -50,12 +46,12 @@ public class MemberController {
         RsData<Member> joinRs = memberService.join(joinForm.getUsername(), joinForm.getPassword());
 
         if (joinRs.isFail()) {
-            return rq.historyBack(joinRs.getMsg());
+            // 뒤로가기 하고 거기서 메세지 보여줘
+            return rq.historyBack(joinRs);
         }
 
-        String msg = joinRs.getMsg() + "\n로그인 후 이용해주세요.";
-
-        return "redirect:/member/login?msg=" + Ut.url.encode(msg);
+        // 아래 링크로 리다이렉트(302, 이동) 하고 그 페이지에서 메세지 보여줘
+        return rq.redirectWithMsg("/member/login", joinRs);
     }
 
     @PreAuthorize("isAnonymous()")
