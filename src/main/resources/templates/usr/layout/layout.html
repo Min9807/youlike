@@ -61,8 +61,16 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 
+<header>
+  <a href="/member/login" sec:authorize="isAnonymous()" class="btn btn-link">로그인</a>
+  <a href="/member/join" sec:authorize="isAnonymous()" class="btn btn-link">회원가입</a>
+  <a href="javascript:;" sec:authorize="isAuthenticated()" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
+  <form th:action="|/member/logout|" method="POST"></form>
+</header>
+
 <main layout:fragment="main"></main>
 
 </body>
 
 </html>
+
