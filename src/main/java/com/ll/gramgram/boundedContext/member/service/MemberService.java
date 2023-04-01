@@ -1,6 +1,7 @@
 package com.ll.gramgram.boundedContext.member.service;
 
 import com.ll.gramgram.base.rsData.RsData;
+import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import com.ll.gramgram.boundedContext.member.entity.Member;
 import com.ll.gramgram.boundedContext.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,9 @@ public class MemberService {
         return RsData.of("S-1", "회원가입이 완료되었습니다.", member);
     }
 
-
+    @Transactional
+    public void updateInstaMember(Member member, InstaMember instaMember) {
+        member.setInstaMember(instaMember);
+        memberRepository.save(member);
+    }
 }
