@@ -4,6 +4,8 @@ package com.ll.gramgram.boundedContext.member.controller;
 import com.ll.gramgram.boundedContext.instaMember.controller.InstaMemberController;
 import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import com.ll.gramgram.boundedContext.instaMember.service.InstaMemberService;
+import com.ll.gramgram.boundedContext.member.entity.Member;
+import com.ll.gramgram.boundedContext.member.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class InstaMemberControllerTests {
     private MockMvc mvc;
     @Autowired
     private InstaMemberService instaMemberService;
+    @Autowired
+    private MemberService memberService;
 
     @Test
     @DisplayName("인스타회원 정보 입력 폼")
@@ -101,6 +105,8 @@ public class InstaMemberControllerTests {
 
         InstaMember instaMember = instaMemberService.findByUsername("abc123").orElse(null);
 
-        assertThat(instaMember).isNotNull();
+        Member member = memberService.findByUsername("user1").orElseThrow();
+
+        assertThat(member.getInstaMember()).isEqualTo(instaMember);
     }
 }

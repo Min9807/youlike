@@ -1,5 +1,6 @@
 package com.ll.gramgram.boundedContext.member.entity;
 
+import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,21 +18,24 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class) // @CreatedDate, @LastModifiedDate 작동하게 허용
 @ToString
-@Entity
+@Entity // 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
 @Getter
 public class Member {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @CreatedDate
+    @CreatedDate // 아래 칼럼에는 값이 자동으로 들어간다.(INSERT 할 때)
     private LocalDateTime createDate;
-    @LastModifiedDate
+    @LastModifiedDate // 아래 칼럼에는 값이 자동으로 들어간다.(UPDATE 할 때 마다)
     private LocalDateTime modifyDate;
     @Column(unique = true)
     private String username;
     private String password;
+    @OneToOne
+    @Setter
+    private InstaMember instaMember;
 
     public List<? extends GrantedAuthority> getGrantedAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
