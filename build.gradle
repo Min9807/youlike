@@ -32,6 +32,7 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {
