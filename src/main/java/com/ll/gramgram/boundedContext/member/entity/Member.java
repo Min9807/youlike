@@ -30,6 +30,7 @@ public class Member {
     private LocalDateTime createDate;
     @LastModifiedDate // 아래 칼럼에는 값이 자동으로 들어간다.(UPDATE 할 때 마다)
     private LocalDateTime modifyDate;
+    private String providerTypeCode;
     @Column(unique = true)
     private String username;
     private String password;
