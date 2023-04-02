@@ -82,7 +82,7 @@ public class LikeablePersonControllerTests {
     }
 
     @Test
-    @DisplayName("등록 폼 처리(user2가 user3의 호감표시(외모)")
+    @DisplayName("등록 폼 처리(user2가 user3에게 호감표시(외모))")
     @WithUserDetails("user2")
     void t003() throws Exception {
         // WHEN
@@ -91,6 +91,27 @@ public class LikeablePersonControllerTests {
                         .with(csrf()) // CSRF 키 생성
                         .param("username", "insta_user3")
                         .param("attractiveTypeCode", "1")
+                )
+                .andDo(print());
+
+        // THEN
+        resultActions
+                .andExpect(handler().handlerType(LikeablePersonController.class))
+                .andExpect(handler().methodName("add"))
+                .andExpect(status().is3xxRedirection());
+        ;
+    }
+
+    @Test
+    @DisplayName("등록 폼 처리(user2가 abcd에게 호감표시(외모), abcd는 아직 우리 서비스에 가입하지 않은상태)")
+    @WithUserDetails("user2")
+    void t004() throws Exception {
+        // WHEN
+        ResultActions resultActions = mvc
+                .perform(post("/likeablePerson/add")
+                        .with(csrf()) // CSRF 키 생성
+                        .param("username", "abcd")
+                        .param("attractiveTypeCode", "2")
                 )
                 .andDo(print());
 
