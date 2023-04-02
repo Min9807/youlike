@@ -98,7 +98,7 @@ public class InstaMemberControllerTests {
                 .andExpect(handler().handlerType(InstaMemberController.class))
                 .andExpect(handler().methodName("connect"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrlPattern("/pop**"));
+                .andExpect(redirectedUrlPattern("/likeablePerson/add**"));
 
         InstaMember instaMember = instaMemberService.findByUsername("abc123").orElse(null);
 
@@ -125,7 +125,7 @@ public class InstaMemberControllerTests {
                 .andExpect(handler().handlerType(InstaMemberController.class))
                 .andExpect(handler().methodName("connect"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrlPattern("/pop**"));
+                .andExpect(redirectedUrlPattern("/likeablePerson/add**"));
 
         InstaMember instaMember = instaMemberService.findByUsername("insta_user100").orElse(null);
 
