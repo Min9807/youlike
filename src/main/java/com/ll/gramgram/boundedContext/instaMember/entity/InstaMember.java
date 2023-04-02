@@ -27,5 +27,6 @@ public class InstaMember {
     private LocalDateTime modifyDate;
     @Column(unique = true)
     private String username;
+    @Setter
     private String gender;
 }

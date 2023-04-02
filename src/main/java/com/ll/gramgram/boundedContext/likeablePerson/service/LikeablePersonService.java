@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -20,10 +18,10 @@ public class LikeablePersonService {
     private final InstaMemberService instaMemberService;
 
     @Transactional
-    public RsData<LikeablePerson> create(Member member, String username, int attractiveTypeCode) {
-        InstaMember toInstaMember = instaMemberService.findByUsernameOrCreate(username);
+    public RsData<LikeablePerson> like(Member member, String username, int attractiveTypeCode) {
+        InstaMember toInstaMember = instaMemberService.findByUsernameOrCreate(username).getData();
 
-        if ( member.getInstaMember().getUsername().equals(username) ) {
+        if (member.getInstaMember().getUsername().equals(username)) {
             return RsData.of("F-1", "본인을 호감상대로 등록할 수 없습니다.");
         }
 
