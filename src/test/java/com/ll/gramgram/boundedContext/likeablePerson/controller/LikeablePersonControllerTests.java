@@ -120,4 +120,33 @@ public class LikeablePersonControllerTests {
                 .andExpect(status().is3xxRedirection());
         ;
     }
+
+    @Test
+    @DisplayName("호감목록")
+    @WithUserDetails("user3")
+    void t005() throws Exception {
+        // WHEN
+        ResultActions resultActions = mvc
+                .perform(get("/likeablePerson/list"))
+                .andDo(print());
+
+        // THEN
+        resultActions
+                .andExpect(handler().handlerType(LikeablePersonController.class))
+                .andExpect(handler().methodName("showList"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().string(containsString("""
+                        <span class="toInstaMember_username">insta_user4</span>
+                        """.stripIndent().trim())))
+                .andExpect(content().string(containsString("""
+                        <span class="toInstaMember_attractiveTypeDisplayName">외모</span>
+                        """.stripIndent().trim())))
+                .andExpect(content().string(containsString("""
+                        <span class="toInstaMember_username">insta_user100</span>
+                        """.stripIndent().trim())))
+                .andExpect(content().string(containsString("""
+                        <span class="toInstaMember_attractiveTypeDisplayName">성격</span>
+                        """.stripIndent().trim())));
+        ;
+    }
 }

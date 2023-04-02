@@ -34,4 +34,12 @@ public class LikeablePerson {
     private InstaMember toInstaMember;
     private String toInstaMemberUsername;
     private int attractiveTypeCode;
+
+    public String getAttractiveTypeDisplayName() {
+        return switch (attractiveTypeCode) {
+            case 1 -> "외모";
+            case 2 -> "성격";
+            default -> "능력";
+        };
+    }
 }
