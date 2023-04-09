@@ -15,7 +15,7 @@ spring:
       client:
         registration:
           kakao:
-            clientId: 961bd74d7dd8536cb18938d829713390
+            clientId: "카카오 API ID 넣기"
             scope:
             client-name: Kakao
             authorization-grant-type: authorization_code
