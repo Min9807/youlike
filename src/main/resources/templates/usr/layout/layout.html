@@ -2,37 +2,46 @@
 
 <head>
 
-    <meta charset="UTF-8">
+    <meta charSet="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- 제이쿼리 불러오기 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+    <!-- toastr 불러오기 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
+    <!-- 공통 JS 불러오기 -->
     <script src="/resource/common/common.js"></script>
+    <!-- 공통 CSS 불러오기 -->
     <link rel="stylesheet" href="/resource/common/common.css">
 
 </head>
 
 <body>
 
+<!-- 데이지 UI 불러오기 -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+<!-- 테일윈드 불러오기 -->
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- 공통 상단 -->
 <header>
-    <a href="/" class="btn btn-link">메인</a>
-    <a href="/member/login" th:if="${@rq.logout}" class="btn btn-link">로그인</a>
-    <a href="/member/join" th:if="${@rq.logout}" class="btn btn-link">회원가입</a>
-    <a href="/member/me" th:if="${@rq.login}" class="btn btn-link">내 정보</a>
-    <a href="/instaMember/connect" th:if="${@rq.login}" class="btn btn-link">본인의 인스타그램 정보 입력</a>
-    <a href="/likeablePerson/add" th:if="${@rq.login}" class="btn btn-link">호감표시</a>
-    <a href="/likeablePerson/list" th:if="${@rq.login}" class="btn btn-link">호감목록</a>
-    <a href="javascript:;" th:if="${@rq.login}" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
+    <a href="/" className="btn btn-link">메인</a>
+    <a href="/member/login" th:if="${@rq.logout}" className="btn btn-link">로그인</a>
+    <a href="/member/join" th:if="${@rq.logout}" className="btn btn-link">회원가입</a>
+    <a href="/member/me" th:if="${@rq.login}" className="btn btn-link">내 정보</a>
+    <a href="/instaMember/connect" th:if="${@rq.login}" className="btn btn-link">본인의 인스타그램 정보 입력</a>
+    <a href="/likeablePerson/add" th:if="${@rq.login}" className="btn btn-link">호감표시</a>
+    <a href="/likeablePerson/list" th:if="${@rq.login}" className="btn btn-link">호감목록</a>
+    <a href="javascript:;" th:if="${@rq.login}" onClick="$(this).next().submit();" className="btn btn-link">로그아웃</a>
     <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
     <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
+    <span th:if="${@rq.login and @rq.member.hasConnectedInstaMember()}"
+          th:text="|(${#lists.size(@rq.member.instaMember.toLikeablePeople)}/${#lists.size(@rq.member.instaMember.fromLikeablePeople)})|"></span>
 </header>
 
 <main layout:fragment="main"></main>

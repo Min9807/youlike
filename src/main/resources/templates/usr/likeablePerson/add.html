@@ -6,7 +6,7 @@
 
 <body>
 
-<mai layout:fragment="main">
+<main layout:fragment="main">
     <th:block th:unless="${@rq.member.hasConnectedInstaMember}">
         <div>먼저 본인의 인스타그램 아이디를 입력해주세요.</div>
 
@@ -17,14 +17,14 @@
 
     <th:block th:if="${@rq.member.hasConnectedInstaMember}">
         <script th:inline="javascript">
-            const myInstaMember = /*[[ ${@rq.member.instaMember} ]]*/ null;
+            const myInstaMemberUsername = /*[[ ${@rq.member.instaMember.username} ]]*/ null;
 
             function AddForm__submit(form) {
                 // username 이(가) 올바른지 체크
 
                 form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-                if (form.username.value.length == 0) {
+                if (form.username.value.length === 0) {
                     toastWarning('상대방의 인스타그램 아이디를 입력해주세요.');
                     form.username.focus();
                     return;
@@ -36,7 +36,7 @@
                     return;
                 }
 
-                if (form.username.value == myInstaMember.username) {
+                if (form.username.value === myInstaMemberUsername) {
                     toastWarning('본인을 호감상대로 등록할 수 없습니다.');
                     form.username.focus();
                     return;
@@ -44,7 +44,7 @@
 
                 const $checkedAttractiveTypeCodeRadioButton = $(form).find("[name=attractiveTypeCode]:checked");
 
-                if ($checkedAttractiveTypeCodeRadioButton.length == 0) {
+                if ($checkedAttractiveTypeCodeRadioButton.length === 0) {
                     toastWarning('상대방의 매력포인트를 선택해주세요.');
                     $(form).find("[name=attractiveTypeCode]:first").focus();
                     return;
@@ -88,7 +88,7 @@
             </div>
         </form>
     </th:block>
-</mai>
+</main>
 </body>
 
 </html>
