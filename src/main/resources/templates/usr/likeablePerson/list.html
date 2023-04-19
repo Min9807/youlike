@@ -6,7 +6,7 @@
 
 <body>
 
-<main layout:fragment="main">
+<mai layout:fragment="main">
   <th:block th:unless="${@rq.member.hasConnectedInstaMember}">
     <div>먼저 본인의 인스타그램 아이디를 입력해주세요.</div>
 
@@ -21,14 +21,11 @@
         <span class="toInstaMember_username" th:text="${likeablePerson.toInstaMember.username}"></span>
         <span class="toInstaMember_attractiveTypeDisplayName"
               th:text="${likeablePerson.attractiveTypeDisplayName}"></span>
-        <a href="javascript:;" onclick="if ( confirm('정말로 삭제하시겠습니까?') ) $(this).next().submit();">삭제</a>
-        <form hidden th:action="@{|/likeablePerson/${likeablePerson.id}|}" method="POST">
-          <input type="hidden" name="_method" value="delete">
-        </form>
+        <a th:href="@{|delete/${likeablePerson.id}|}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
       </li>
     </ul>
   </th:block>
-</main>
+</mai>
 </body>
 
 </html>

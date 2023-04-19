@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/likeablePerson")
@@ -39,11 +40,22 @@ public class LikeablePersonController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
     public String add(@Valid AddForm addForm) {
-        RsData<LikeablePerson> createRsData = likeablePersonService.like(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
+        RsData canActorLikeRsData = likeablePersonService.canActorLike(rq.getMember(), addForm.getUsername()); // 호감표시할 수있는지 확인
+        if (canActorLikeRsData.isFail()) return rq.historyBack(canActorLikeRsData);
 
-        if (createRsData.isFail()) {
-            return rq.historyBack(createRsData);
+        // 기존에 호감표시를 했다면 검증을 통해 호감사유 변경
+        Optional<LikeablePerson> op = likeablePersonService.canModify(rq.getMember(), addForm.getUsername());
+        if(op.isPresent()){
+            RsData<LikeablePerson> canModify = likeablePersonService.modify(op.get(), addForm.getAttractiveTypeCode());
+            if(canModify.isFail()){
+                return rq.historyBack(canModify);
+            }
+            return rq.redirectWithMsg("/likeablePerson/list", canModify);
         }
+
+        // 호감상대등록
+        RsData<LikeablePerson> createRsData = likeablePersonService.like(rq.getMember(), addForm.getUsername(), addForm.getAttractiveTypeCode());
+        if (createRsData.isFail()) return rq.historyBack(createRsData);
 
         return rq.redirectWithMsg("/likeablePerson/list", createRsData);
     }

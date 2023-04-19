@@ -26,9 +26,9 @@ public class Member {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @CreatedDate // 아래 칼럼에는 값이 자동으로 들어간다.(INSERT 할 때)
+    @CreatedDate
     private LocalDateTime createDate;
-    @LastModifiedDate // 아래 칼럼에는 값이 자동으로 들어간다.(UPDATE 할 때 마다)
+    @LastModifiedDate
     private LocalDateTime modifyDate;
     private String providerTypeCode;
     @Column(unique = true)

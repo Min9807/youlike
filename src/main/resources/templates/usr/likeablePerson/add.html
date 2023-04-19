@@ -11,7 +11,7 @@
         <div>먼저 본인의 인스타그램 아이디를 입력해주세요.</div>
 
         <div>
-            <a href="/instaMember/connect" class="btn btn-link">본인의 인스타그램 아이디 입력하기</a>
+            <a href="/instaMember/connect" className="btn btn-link">본인의 인스타그램 아이디 입력하기</a>
         </div>
     </th:block>
 
@@ -54,37 +54,37 @@
             }
         </script>
 
-        <form th:action method="POST" class="p-10 max-w-sm flex flex-col gap-4"
-              onsubmit="AddForm__submit(this); return false;">
+        <form th:action method="POST" className="p-10 max-w-sm flex flex-col gap-4"
+              onSubmit="AddForm__submit(this); return false;">
             <div>
-                당신의 인스타ID : <span class="badge" th:text="${@rq.member.instaMember.username}"></span>
+                당신의 인스타ID : <span className="badge" th:text="${@rq.member.instaMember.username}"></span>
             </div>
             <div>
-                <input type="text" name="username" autocomplete="off" maxlength="30" placeholder="상대방의 인스타그램 아이디"
-                       class="input input-bordered">
+                <input type="text" name="username" autoComplete="off" maxLength="30" placeholder="상대방의 인스타그램 아이디"
+                       className="input input-bordered">
             </div>
             <div>
-                <div class="form-control">
-                    <label class="label cursor-pointer">
-                        <span class="label-text">외모</span>
-                        <input type="radio" name="attractiveTypeCode" value="1" class="radio focus:bg-red-100">
+                <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <span className="label-text">외모</span>
+                        <input type="radio" name="attractiveTypeCode" value="1" className="radio focus:bg-red-100">
                     </label>
                 </div>
-                <div class="form-control">
-                    <label class="label cursor-pointer">
-                        <span class="label-text">성격</span>
-                        <input type="radio" name="attractiveTypeCode" value="2" class="radio focus:bg-red-100">
+                <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <span className="label-text">성격</span>
+                        <input type="radio" name="attractiveTypeCode" value="2" className="radio focus:bg-red-100">
                     </label>
                 </div>
-                <div class="form-control">
-                    <label class="label cursor-pointer">
-                        <span class="label-text">능력</span>
-                        <input type="radio" name="attractiveTypeCode" value="3" class="radio focus:bg-red-100">
+                <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <span className="label-text">능력</span>
+                        <input type="radio" name="attractiveTypeCode" value="3" className="radio focus:bg-red-100">
                     </label>
                 </div>
             </div>
             <div>
-                <input type="submit" value="추가" class="btn btn-primary">
+                <input type="submit" value="추가" className="btn btn-primary">
             </div>
         </form>
     </th:block>
