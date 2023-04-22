@@ -6,14 +6,14 @@
 
 <body>
 
-<main layout:fragment="main">
+<main layout:fragment="main" class="flex-grow flex items-center justify-center">
     <script>
         function LoginForm__submit(form) {
             // username 이(가) 올바른지 체크
 
             form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-            if (form.username.value.length == 0) {
+            if (form.username.value.length === 0) {
                 toastWarning('아이디를 입력해주세요.');
                 form.username.focus();
                 return;
@@ -29,7 +29,7 @@
 
             form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-            if (form.password.value.length == 0) {
+            if (form.password.value.length === 0) {
                 form.password.focus();
                 toastWarning('비밀번호를 입력해주세요.');
                 return;
@@ -45,30 +45,53 @@
         }
     </script>
 
-    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="LoginForm__submit(this); return false;">
-        <div>
-            <input type="text" name="username" maxlength="30" placeholder="아이디" class="input input-bordered">
-        </div>
-        <div>
-            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
-        </div>
-        <div>
-            <input type="submit" value="로그인" class="btn btn-primary">
-        </div>
-    </form>
+    <div class="max-w-2xl w-full px-4">
+        <h1 class="mb-4">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            로그인
+        </h1>
 
-    <div>
-        <a class="btn btn-link" href="/oauth2/authorization/kakao">
-            카카오로 로그인하기
-        </a>
+        <form th:action method="POST" class="flex flex-col gap-6" onsubmit="LoginForm__submit(this); return false;">
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">아이디</span>
+                </label>
+                <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus/>
+            </div>
 
-        <a class="btn btn-link" href="/oauth2/authorization/google">
-            구글 로그인하기
-        </a>
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">비빌번호</span>
+                </label>
+                <input type="password" name="password" placeholder="비빌번호" class="input input-bordered"/>
+            </div>
 
-        <a class="btn btn-link" href="/oauth2/authorization/naver">
-            네이버 로그인하기
-        </a>
+            <button id="btn-login-1" class="btn btn-block btn-primary gap-1">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <span>로그인</span>
+            </button>
+
+            <a href="/oauth2/authorization/kakao" class="btn btn-block btn-outline gap-1">
+                <i class="fa-solid fa-comment text-[color:#ffe812]"></i>
+                <span>카카오 로그인</span>
+            </a>
+
+            <a href="/oauth2/authorization/naver" class="btn btn-block btn-outline gap-1">
+                <i class="fa-solid fa-n text-[color:#2DB400]"></i>
+                <span>네이버 로그인</span>
+            </a>
+
+            <a href="/oauth2/authorization/google" class="btn btn-block btn-outline gap-1">
+                <i class="fa-brands fa-google text-[color:#ff4000]"></i>
+                <span>구글 로그인</span>
+            </a>
+
+            <div class="flex flex-wrap justify-center">
+                <a href="/member/join" class="btn btn-link">회원가입</a>
+                <a href="#" class="btn btn-link">아이디찾기</a>
+                <a href="#" class="btn btn-link">비밀번호찾기</a>
+            </div>
+        </form>
     </div>
 </main>
 </body>

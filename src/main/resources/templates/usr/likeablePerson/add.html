@@ -6,12 +6,12 @@
 
 <body>
 
-<main layout:fragment="main">
+<main layout:fragment="main" class="flex-grow flex items-center justify-center">
     <th:block th:unless="${@rq.member.hasConnectedInstaMember}">
         <div>먼저 본인의 인스타그램 아이디를 입력해주세요.</div>
 
         <div>
-            <a href="/instaMember/connect" className="btn btn-link">본인의 인스타그램 아이디 입력하기</a>
+            <a href="/instaMember/connect" class="btn btn-link">본인의 인스타그램 아이디 입력하기</a>
         </div>
     </th:block>
 
@@ -19,7 +19,7 @@
         <script th:inline="javascript">
             const myInstaMemberUsername = /*[[ ${@rq.member.instaMember.username} ]]*/ null;
 
-            function AddForm__submit(form) {
+            function LikeForm__submit(form) {
                 // username 이(가) 올바른지 체크
 
                 form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
@@ -54,39 +54,81 @@
             }
         </script>
 
-        <form th:action method="POST" className="p-10 max-w-sm flex flex-col gap-4"
-              onSubmit="AddForm__submit(this); return false;">
-            <div>
-                당신의 인스타ID : <span className="badge" th:text="${@rq.member.instaMember.username}"></span>
-            </div>
-            <div>
-                <input type="text" name="username" autoComplete="off" maxLength="30" placeholder="상대방의 인스타그램 아이디"
-                       className="input input-bordered">
-            </div>
-            <div>
-                <div className="form-control">
-                    <label className="label cursor-pointer">
-                        <span className="label-text">외모</span>
-                        <input type="radio" name="attractiveTypeCode" value="1" className="radio focus:bg-red-100">
+        <div class="max-w-2xl w-full px-4">
+            <h1 class="mb-4">
+                <i class="fa-solid fa-heart-circle-plus"></i>
+                호감표시
+            </h1>
+
+            <form class="flex flex-col gap-6" method="POST" th:action onsubmit="LikeForm__submit(this); return false;">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">당신의 인스타 아이디</span>
                     </label>
+                    <div class="badge badge-primary" th:text="${@rq.member.instaMember.username}"></div>
                 </div>
-                <div className="form-control">
-                    <label className="label cursor-pointer">
-                        <span className="label-text">성격</span>
-                        <input type="radio" name="attractiveTypeCode" value="2" className="radio focus:bg-red-100">
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">상대방 인스타 아이디</span>
                     </label>
+                    <input type="text" name="username" placeholder="인스타 아이디" class="input input-bordered" autofocus
+                           onchange="$(this).keyup();"
+                           onkeyup="$(this).next().children(':last-child').text(this.value.trim());"
+                           onpaste="setTimeoutZero(() => $(this).keyup());"/>
+                    <a href="#" onclick="$(this).attr('href', $(this).text().replaceAll(' ', ''));" target="_blank"
+                       class="block mt-3 text-sm break-all underline text-blue-400">
+                        <span>https://instagram.com/</span><span class="text-red-300"></span>
+                    </a>
+                    <script>
+                        // input : 태그가 input 인 녀석 선택
+                        // input[name="username"] 태그가 input 이고 name 속성의 값이 username 인 녀석을 선택
+                        // input[name="username"]:last : 태그가 input 이고 name 속성의 값이 username 인 녀석들 중에서 꼴등 한명 선택
+                        // .keyup(); : 강제로 keyup 이벤트 트리거(이벤트를 강제로 발동시킨다.)
+                        $(`input[name="username"]:last`).keyup();
+                    </script>
                 </div>
-                <div className="form-control">
-                    <label className="label cursor-pointer">
-                        <span className="label-text">능력</span>
-                        <input type="radio" name="attractiveTypeCode" value="3" className="radio focus:bg-red-100">
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">호감사유</span>
                     </label>
+
+                    <!-- 라벨을 클릭하면 라벨의 하위요소인 버튼(체크,라디오,일반 등)이 클릭되는 효과) -->
+                    <div class="flex justify-center gap-4">
+                        <label class="flex gap-2 items-center cursor-pointer">
+                            <input type="radio" name="attractiveTypeCode" value="1" class="radio peer">
+                            <span class="text-gray-400 peer-checked:text-gray-900 peer-checked:font-bold peer-focus:text-gray-700">
+                                <i class="fa-solid fa-person-rays"></i>
+                                외모
+                            </span>
+                        </label>
+
+                        <label class="flex gap-2 items-center cursor-pointer">
+                            <input type="radio" name="attractiveTypeCode" value="2" class="radio peer">
+                            <span class="text-gray-400 peer-checked:text-gray-900 peer-checked:font-bold peer-focus:text-gray-700">
+                                <i class="fa-regular fa-face-smile"></i>
+                                성격
+                            </span>
+                        </label>
+
+                        <label class="flex gap-2 items-center cursor-pointer">
+                            <input type="radio" name="attractiveTypeCode" value="3" class="radio peer">
+                            <span class="text-gray-400 peer-checked:text-gray-900 peer-checked:font-bold peer-focus:text-gray-700">
+                                <i class="fa-solid fa-people-roof"></i>
+                                능력
+                            </span>
+                        </label>
+                    </div>
+
                 </div>
-            </div>
-            <div>
-                <input type="submit" value="추가" className="btn btn-primary">
-            </div>
-        </form>
+
+                <button id="btn-like-1" class="btn btn-block btn-primary gap-1">
+                    <i class="fa-solid fa-heart-circle-plus"></i>
+                    <span>호감표시</span>
+                </button>
+            </form>
+        </div>
     </th:block>
 </main>
 </body>

@@ -6,14 +6,14 @@
 
 <body>
 
-<main layout:fragment="main">
+<main layout:fragment="main" class="flex-grow flex items-center justify-center">
     <script>
         function JoinForm__submit(form) {
             // username 이(가) 올바른지 체크
 
             form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-            if (form.username.value.length == 0) {
+            if (form.username.value.length === 0) {
                 toastWarning('아이디를 입력해주세요.');
                 form.username.focus();
                 return;
@@ -29,7 +29,7 @@
 
             form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-            if (form.password.value.length == 0) {
+            if (form.password.value.length === 0) {
                 form.password.focus();
                 toastWarning('비밀번호를 입력해주세요.');
                 return;
@@ -41,21 +41,58 @@
                 return;
             }
 
+            form.passwordConfirm.value = form.passwordConfirm.value.trim();
+
+            if (form.password.value != form.passwordConfirm.value) {
+                toastWarning('비밀번호 확인이 일치하지 않습니다.');
+                form.passwordConfirm.focus();
+                return;
+            }
+
             form.submit(); // 폼 발송
         }
     </script>
 
-    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
-        <div>
-            <input type="text" name="username" maxlength="30" placeholder="아이디" class="input input-bordered">
-        </div>
-        <div>
-            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
-        </div>
-        <div>
-            <input type="submit" value="회원가입" class="btn btn-primary">
-        </div>
-    </form>
+    <div class="max-w-2xl w-full px-4">
+        <h1 class="mb-4">
+            <i class="fa-solid fa-user-plus"></i>
+            회원가입
+        </h1>
+
+        <form th:action method="POST" class="flex flex-col gap-6" onsubmit="JoinForm__submit(this); return false;">
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">아이디</span>
+                </label>
+                <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus/>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">비빌번호</span>
+                </label>
+                <input type="password" name="password" placeholder="비빌번호" class="input input-bordered"/>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">비빌번호 확인</span>
+                </label>
+                <input type="password" name="passwordConfirm" placeholder="비빌번호 확인" class="input input-bordered"/>
+            </div>
+
+            <button id="btn-join-1" class="btn btn-block btn-primary gap-1">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>회원가입</span>
+            </button>
+
+            <div class="flex flex-wrap justify-center">
+                <a href="/member/login" class="btn btn-link">로그인</a>
+                <a href="#" class="btn btn-link">아이디찾기</a>
+                <a href="#" class="btn btn-link">비밀번호찾기</a>
+            </div>
+        </form>
+    </div>
 </main>
 
 </body>

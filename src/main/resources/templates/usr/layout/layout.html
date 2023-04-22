@@ -1,7 +1,6 @@
-<html>
+<html data-theme="light" lang="ko">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -14,11 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
+    <!-- 폰트어썸 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 아이콘 목록 : https://fontawesome.com/search?o=r&m=free -->
+
     <!-- 공통 JS 불러오기 -->
     <script src="/resource/common/common.js"></script>
     <!-- 공통 CSS 불러오기 -->
     <link rel="stylesheet" href="/resource/common/common.css">
 
+    <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">그램그램</title>
 </head>
 
 <body>
@@ -28,22 +32,66 @@
 <!-- 테일윈드 불러오기 -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- 공통 상단 -->
-<header>
-    <a href="/" class="btn btn-link">메인</a>
-    <a href="/member/login" th:if="${@rq.logout}" class="btn btn-link">로그인</a>
-    <a href="/member/join" th:if="${@rq.logout}" class="btn btn-link">회원가입</a>
-    <a href="/member/me" th:if="${@rq.login}" class="btn btn-link">내 정보</a>
-    <a href="/instaMember/connect" th:if="${@rq.login}" class="btn btn-link">본인의 인스타그램 정보 입력</a>
-    <a href="/likeablePerson/add" th:if="${@rq.login}" class="btn btn-link">호감표시</a>
-    <a href="/likeablePerson/list" th:if="${@rq.login}" class="btn btn-link">호감목록</a>
-    <a href="javascript:;" th:if="${@rq.login}" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
-    <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
-    <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
-    <span th:if="${@rq.login and @rq.member.hasConnectedInstaMember()}" th:text="|(${#lists.size(@rq.member.instaMember.toLikeablePeople)}/${#lists.size(@rq.member.instaMember.fromLikeablePeople)})|"></span>
-</header>
+<!-- min-h-screen : min-height:100vh; -->
+<div class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50">
+        <div class="navbar max-w-2xl mx-auto bg-base-100">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 6h16M4 12h16M4 18h7"/>
+                        </svg>
+                    </label>
+                    <ul tabindex="0"
+                        class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <li th:if="${@rq.logout}"><a href="/member/login"><i
+                                class="fa-solid fa-arrow-right-to-bracket"></i> 로그인</a>
+                        </li>
+                        <li th:if="${@rq.logout}"><a href="/member/join"><i class="fa-solid fa-user-plus"></i> 회원가입</a>
+                        </li>
+                        <li th:if="${@rq.login}"><a href="/member/me"><i class="fa-solid fa-user"></i> 내 정보</a></li>
+                        <li th:if="${@rq.login}">
+                            <a href="javascript:;" onclick="$(this).next().submit();">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃
+                            </a>
+                            <form class="!hidden" hidden th:action="|/member/logout|" method="POST"></form>
+                        </li>
+                        <li th:if="${@rq.login}"><a href="/instaMember/connect"><i class="fa-brands fa-instagram"></i>
+                            인스타아이디 입력</a></li>
+                        <li th:if="${@rq.login}"><a href="/likeablePerson/add"><i
+                                class="fa-solid fa-heart-circle-plus"></i> 호감표시</a></li>
+                        <li th:if="${@rq.login}"><a href="/likeablePerson/list"><i class="fa-solid fa-list-ol"></i> 호감목록</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-center">
+                <a href="/" class="btn btn-ghost normal-case text-xl">gramgram</a>
+            </div>
+            <div class="navbar-end">
+                <a href="/member/me" class="btn btn-ghost gap-1" th:if="${@rq.login}">
+                    <i class="fa-solid fa-user"></i>
+                    <span th:text="${@rq.member.nickname}"></span>
+                </a>
+                <button class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                        </svg>
+                        <span class="badge badge-xs badge-primary indicator-item"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<main layout:fragment="main"></main>
+    <main layout:fragment="main"></main>
+</div>
 
 <script th:inline="javascript">
     // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
@@ -65,10 +113,16 @@
         if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
             toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
             localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+        } else if (!document.referrer) {
+            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
+
+            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+            }
         }
     });
 </script>
 
 </body>
-
 </html>
