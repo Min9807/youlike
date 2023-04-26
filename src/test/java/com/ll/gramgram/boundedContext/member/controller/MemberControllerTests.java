@@ -1,6 +1,7 @@
 package com.ll.gramgram.boundedContext.member.controller;
 
 
+import com.ll.gramgram.boundedContext.home.controller.HomeController;
 import com.ll.gramgram.boundedContext.member.entity.Member;
 import com.ll.gramgram.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -202,13 +203,13 @@ public class MemberControllerTests {
     void t006() throws Exception {
         // WHEN
         ResultActions resultActions = mvc
-                .perform(get("/member/me"))
+                .perform(get("/"))
                 .andDo(print());
 
         // THEN
         resultActions
-                .andExpect(handler().handlerType(MemberController.class))
-                .andExpect(handler().methodName("showMe"))
+                .andExpect(handler().handlerType(HomeController.class))
+                .andExpect(handler().methodName("showMain"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().string(containsString("""
                         0002
