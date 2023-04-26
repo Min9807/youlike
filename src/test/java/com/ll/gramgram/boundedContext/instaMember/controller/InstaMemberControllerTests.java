@@ -60,7 +60,7 @@ public class InstaMemberControllerTests {
                         <input type="radio" name="gender" value="M"
                         """.stripIndent().trim())))
                 .andExpect(content().string(containsString("""
-                        <input type="submit" value="정보입력"
+                        id="btn-insta-member-connect-1"
                         """.stripIndent().trim())));
     }
 

@@ -1,5 +1,6 @@
 package com.ll.gramgram.boundedContext.member.controller;
 
+
 import com.ll.gramgram.boundedContext.member.entity.Member;
 import com.ll.gramgram.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -25,10 +26,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest // 스프링부트 관련 컴포넌트 테스트할 때 붙여야 함, Ioc 컨테이너 작동시킴
-@AutoConfigureMockMvc // http 요청, 응답 테스트
-@Transactional // 실제로 테스트에서 발생한 DB 작업이 영구적으로 적용되지 않도록, test + 트랜잭션 => 자동롤백
-@ActiveProfiles("test") // application-test.yml 을 활성화 시킨다.
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
+@ActiveProfiles("test")
 public class MemberControllerTests {
     @Autowired
     private MockMvc mvc;
@@ -41,7 +42,7 @@ public class MemberControllerTests {
         // WHEN
         ResultActions resultActions = mvc
                 .perform(get("/member/join"))
-                .andDo(print()); // 크게 의미 없고, 그냥 확인용
+                .andDo(print());
 
         // THEN
         resultActions
@@ -55,12 +56,11 @@ public class MemberControllerTests {
                         <input type="password" name="password"
                         """.stripIndent().trim())))
                 .andExpect(content().string(containsString("""
-                        <input type="submit" value="회원가입"
+                        id="btn-join-1"
                         """.stripIndent().trim())));
     }
 
     @Test
-    // @Rollback(value = false) // DB에 흔적이 남는다.
     @DisplayName("회원가입")
     void t002() throws Exception {
         // WHEN
@@ -166,7 +166,7 @@ public class MemberControllerTests {
                         <input type="password" name="password"
                         """.stripIndent().trim())))
                 .andExpect(content().string(containsString("""
-                        <input type="submit" value="로그인"
+                        id="btn-login-1"
                         """.stripIndent().trim())));
     }
 
@@ -183,9 +183,8 @@ public class MemberControllerTests {
                 )
                 .andDo(print());
 
-        // 세션에 접근해서 user 객체를 가져온다.
         MvcResult mvcResult = resultActions.andReturn();
-        HttpSession session = mvcResult.getRequest().getSession(false);// 원래 getSession 을 하면, 만약에 없을 경우에 만들어서라도 준다., false 는 없으면 만들지 말라는 뜻
+        HttpSession session = mvcResult.getRequest().getSession(false);
         SecurityContext securityContext = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
         User user = (User) securityContext.getAuthentication().getPrincipal();
 
@@ -197,12 +196,9 @@ public class MemberControllerTests {
                 .andExpect(redirectedUrlPattern("/**"));
     }
 
-
     @Test
-    // @Rollback(value = false) // DB에 흔적이 남는다.
     @DisplayName("로그인 후에 내비바에 로그인한 회원의 username")
     @WithUserDetails("user1")
-        // user1로 로그인 한 상태로 진행
     void t006() throws Exception {
         // WHEN
         ResultActions resultActions = mvc
@@ -215,7 +211,7 @@ public class MemberControllerTests {
                 .andExpect(handler().methodName("showMe"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().string(containsString("""
-                        user1님 환영합니다.
+                        0002
                         """.stripIndent().trim())));
     }
 }
