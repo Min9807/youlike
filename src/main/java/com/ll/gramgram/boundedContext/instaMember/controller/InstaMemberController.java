@@ -33,7 +33,7 @@ public class InstaMemberController {
     @Getter
     public static class ConnectForm {
         @NotBlank
-        @Size(min = 4, max = 30)
+        @Size(min = 3, max = 30)
         private final String username;
         @NotBlank
         @Size(min = 1, max = 1)

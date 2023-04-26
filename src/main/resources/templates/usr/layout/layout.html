@@ -33,7 +33,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- min-h-screen : min-height:100vh; -->
-<div class="min-h-screen flex flex-col">
+<div class="min-h-screen flex flex-col pb-10">
     <header class="sticky top-0 z-50">
         <div class="navbar max-w-2xl mx-auto bg-base-100">
             <div class="!w-auto flex-grow">
@@ -63,8 +63,12 @@
                                 class="fa-solid fa-heart-circle-plus"></i> 호감표시</a></li>
                         <li th:if="${@rq.login}"><a href="/likeablePerson/list"><i class="fa-solid fa-list-ol"></i> 호감목록</a>
                         </li>
-                        <li th:if="${@rq.login}"><a href="/instaMember/connect"><i class="fa-brands fa-instagram"></i>
-                            인스타 아이디 입력</a></li>
+                        <li th:if="${@rq.login}" th:unless="${@rq.member.hasConnectedInstaMember}">
+                            <a href="/usr/instaMember/connect">
+                                <i class="fa-brands fa-instagram"></i>
+                                인스타 아이디 입력
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

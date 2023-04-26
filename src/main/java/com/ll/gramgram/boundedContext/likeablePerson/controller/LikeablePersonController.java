@@ -6,6 +6,8 @@ import com.ll.gramgram.boundedContext.instaMember.entity.InstaMember;
 import com.ll.gramgram.boundedContext.likeablePerson.entity.LikeablePerson;
 import com.ll.gramgram.boundedContext.likeablePerson.service.LikeablePersonService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,11 @@ public class LikeablePersonController {
     @AllArgsConstructor
     @Getter
     public static class AddForm {
+        @NotBlank
+        @Size(min = 3, max = 30)
         private final String username;
+        @NotBlank
+        @Size(min = 1, max = 1)
         private final int attractiveTypeCode;
     }
 
