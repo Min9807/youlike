@@ -113,7 +113,7 @@
         if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
             toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
             localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
-        } else if (!document.referrer) {
+        } else {
             const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___null";
 
             if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {

@@ -22,7 +22,7 @@
         호감목록
       </h1>
 
-      <ul class="grid grid-cols-1 gap-4">
+      <ul class="flex flex-col gap-4">
         <li th:each="likeablePerson: ${likeablePeople}">
           <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
@@ -37,16 +37,24 @@
                                                          th:text="${likeablePerson.toInstaMember.username}"></span>
               </a>
 
-              <div class="mt-2">
-                <div class="badge badge-primary -ml-2">호감사유</div>
-                <div class="mt-1" th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
+              <div class="mt-4 mb-2 flex flex-col items-center gap-2">
+                <div class="badge badge-primary">호감사유</div>
+                <div th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
                      th:utext="${likeablePerson.attractiveTypeDisplayNameWithIcon}"></div>
               </div>
 
-              <div class="card-actions justify-end">
-                <a class="btn btn-sm btn-outline">호감사유 변경</a>
+              <div class="card-actions justify-center">
+                <a th:href="@{|modify/${likeablePerson.id}|}" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  &nbsp;
+                  호감사유 변경
+                </a>
                 <a class="btn btn-sm btn-outline" href="javascript:;"
-                   onclick="if ( confirm('정말로 취소하시겠습니까?') ) $(this).next().submit();">호감취소</a>
+                   onclick="if ( confirm('정말로 취소하시겠습니까?') ) $(this).next().submit();">
+                  <i class="fa-solid fa-user-slash"></i>
+                  &nbsp;
+                  호감취소
+                </a>
                 <form hidden th:action="@{|/likeablePerson/${likeablePerson.id}|}" method="POST">
                   <input type="hidden" name="_method" value="delete">
                 </form>
