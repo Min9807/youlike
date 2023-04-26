@@ -35,11 +35,9 @@ public class LikeablePersonController {
     @AllArgsConstructor
     @Getter
     public static class AddForm {
-        @NotBlank
-        @Size(min = 3, max = 30)
+
         private final String username;
-        @NotBlank
-        @Size(min = 1, max = 1)
+
         private final int attractiveTypeCode;
     }
 

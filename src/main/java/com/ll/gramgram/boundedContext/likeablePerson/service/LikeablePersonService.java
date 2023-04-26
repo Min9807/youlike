@@ -61,7 +61,7 @@ public class LikeablePersonService {
         String preAttractiveType = likeablePerson.getAttractiveTypeDisplayName(); // 현재 매력포인트
         boolean canModifyAttractiveType = checkSameAttractiveType(likeablePerson, attractiveTypeCode);
         if(canModifyAttractiveType){ // 현재 매력 포인트와 선택한 매력포인트가 다를 경우 호감사유 수정
-            likeablePerson.setAttractiveTypeCode(attractiveTypeCode);
+            likeablePerson.updateAttractionTypeCode(attractiveTypeCode);
             likeablePersonRepository.save(likeablePerson);
             String nowAttractiveType = likeablePerson.getAttractiveTypeDisplayName(); // 선택한 매력포인트 한글 패치(?)
             return RsData.of("S-1", "%s에 대한 호감사유를 %s에서 %s으로 변경합니다.".formatted(likeablePerson.getFromInstaMemberUsername(), preAttractiveType, nowAttractiveType), likeablePerson);
@@ -80,7 +80,7 @@ public class LikeablePersonService {
             return false;
         }
         else{ // 현재 매력 포인트와 선택한 매력포인트가 다를 경우 호감사유 수정
-            modifyAttractiveType.setAttractiveTypeCode(attractiveTypeCode);
+            modifyAttractiveType.updateAttractionTypeCode(attractiveTypeCode);
             likeablePersonRepository.save(modifyAttractiveType);
             return true;
         }
@@ -136,7 +136,7 @@ public class LikeablePersonService {
             return canModifyRsData;
         }
 
-        likeablePerson.setAttractiveTypeCode(attractiveTypeCode);
+        likeablePerson.updateAttractionTypeCode(attractiveTypeCode);
 
         return RsData.of("S-1", "호감사유를 수정하였습니다.");
     }
