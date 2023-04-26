@@ -36,7 +36,7 @@
 <div class="min-h-screen flex flex-col">
     <header class="sticky top-0 z-50">
         <div class="navbar max-w-2xl mx-auto bg-base-100">
-            <div class="navbar-start">
+            <div class="!w-auto flex-grow">
                 <div class="dropdown">
                     <label tabindex="0" class="btn btn-ghost btn-circle">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -68,15 +68,19 @@
                     </ul>
                 </div>
             </div>
-            <div class="navbar-center">
-                <a href="/" class="btn btn-ghost normal-case text-xl">gramgram</a>
+            <div>
+                <a href="/" class="btn btn-ghost normal-case text-xl">
+                    <span class="hidden min-[341px]:inline">gramgram</span>
+                    <span th:if="${@rq.logout}" class="min-[341px]:hidden">gg</span>
+                    <span th:if="${@rq.login}" class="max-[250px]:hidden min-[341px]:hidden">gg</span>
+                </a>
             </div>
-            <div class="navbar-end">
+            <div class="flex-grow flex justify-end">
                 <a href="/member/me" class="btn btn-ghost gap-1" th:if="${@rq.login}">
                     <i class="fa-solid fa-user"></i>
                     <span th:text="${@rq.member.nickname}"></span>
                 </a>
-                <button class="btn btn-ghost btn-circle">
+                <button class="btn btn-ghost btn-circle !hidden min-[300px]:!block">
                     <div class="indicator">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
