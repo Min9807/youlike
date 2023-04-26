@@ -40,15 +40,15 @@
     <div class="max-w-2xl w-full px-4">
         <h1 class="mb-4">
             <i class="fa-brands fa-instagram"></i>
-            인스타아이디 인증
+            인스타 아이디 입력
         </h1>
 
         <form class="flex flex-col gap-6" method="POST" th:action onsubmit="ConnectForm__submit(this); return false;">
             <div class="form-control">
                 <label class="label">
-                    <span class="label-text">인스타아이디</span>
+                    <span class="label-text">인스타 아이디</span>
                 </label>
-                <input type="text" name="username" placeholder="인스타아이디" class="input input-bordered" autofocus
+                <input type="text" name="username" placeholder="인스타 아이디" class="input input-bordered" autofocus
                        onchange="$(this).keyup();"
                        onkeyup="$(this).next().children(':last-child').text(this.value.trim());"
                        onpaste="setTimeoutZero(() => $(this).keyup());"/>
@@ -93,7 +93,7 @@
 
             <button id="btn-insta-member-connect-1" class="btn btn-block btn-primary gap-1">
                 <i class="fa-brands fa-instagram"></i>
-                <span>인스타아이디 인증</span>
+                <span>인스타 아이디 입력</span>
             </button>
         </form>
     </div>

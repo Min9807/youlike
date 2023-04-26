@@ -7,13 +7,7 @@
 <body>
 
 <main layout:fragment="main" class="flex-grow flex items-center justify-center">
-    <th:block th:unless="${@rq.member.hasConnectedInstaMember}">
-        <div>먼저 본인의 인스타그램 아이디를 입력해주세요.</div>
-
-        <div>
-            <a href="/instaMember/connect" class="btn btn-link">본인의 인스타그램 아이디 입력하기</a>
-        </div>
-    </th:block>
+    <div th:unless="${@rq.member.hasConnectedInstaMember}" th:include="usr/part/needToConnect::base"></div>
 
     <th:block th:if="${@rq.member.hasConnectedInstaMember}">
         <script th:inline="javascript">
@@ -128,6 +122,11 @@
                     <span>호감표시</span>
                 </button>
             </form>
+
+            <div class="text-center mt-4">
+                <a th:if="${@rq.member.hasConnectedInstaMember}" href="list" class="btn btn-link">호감목록</a>
+                <a th:if="${@rq.member.hasConnectedInstaMember}" href="/member/me" class="btn btn-link">내 정보</a>
+            </div>
         </div>
     </th:block>
 </main>

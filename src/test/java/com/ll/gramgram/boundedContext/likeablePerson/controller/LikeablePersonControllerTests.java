@@ -58,9 +58,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("showAdd"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string(containsString("""
-                        먼저 본인의 인스타그램 아이디를 입력해주세요.
-                        """.stripIndent().trim())))
+                .andExpect(content().string(containsString("먼저 본인의 인스타 아이디를 입력해주세요.".stripIndent().trim())))
         ;
     }
 

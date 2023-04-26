@@ -52,19 +52,19 @@
                         </li>
                         <li th:if="${@rq.logout}"><a href="/member/join"><i class="fa-solid fa-user-plus"></i> 회원가입</a>
                         </li>
-                        <li th:if="${@rq.login}"><a href="/member/me"><i class="fa-solid fa-user"></i> 내 정보</a></li>
                         <li th:if="${@rq.login}">
                             <a href="javascript:;" onclick="$(this).next().submit();">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃
                             </a>
                             <form class="!hidden" hidden th:action="|/member/logout|" method="POST"></form>
                         </li>
-                        <li th:if="${@rq.login}"><a href="/instaMember/connect"><i class="fa-brands fa-instagram"></i>
-                            인스타아이디 입력</a></li>
+                        <li th:if="${@rq.login}"><a href="/member/me"><i class="fa-solid fa-user"></i> 내 정보</a></li>
                         <li th:if="${@rq.login}"><a href="/likeablePerson/add"><i
                                 class="fa-solid fa-heart-circle-plus"></i> 호감표시</a></li>
                         <li th:if="${@rq.login}"><a href="/likeablePerson/list"><i class="fa-solid fa-list-ol"></i> 호감목록</a>
                         </li>
+                        <li th:if="${@rq.login}"><a href="/instaMember/connect"><i class="fa-brands fa-instagram"></i>
+                            인스타 아이디 입력</a></li>
                     </ul>
                 </div>
             </div>
