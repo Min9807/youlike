@@ -246,7 +246,7 @@
                  th:each="likeablePerson, i: ${@rq.member.instaMember.toLikeablePeople}">
                 <div class="card-body">
                     <h2 class="card-title">
-                        <span th:text="|No. ${i.index + 1} / ${i.count}|"></span>
+                        <span th:text="|No. ${i.index + 1} / ${i.size}|"></span>
                     </h2>
 
                     <div class="mt-4">
