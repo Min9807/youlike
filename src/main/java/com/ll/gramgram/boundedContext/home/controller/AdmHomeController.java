@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/adm")
+@PreAuthorize("hasAuthority('admin')")
 public class AdmHomeController {
     @GetMapping("")
-    @PreAuthorize("hasAuthority('admin')")
     public String showMain() {
         return "adm/home/main";
     }
