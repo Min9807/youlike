@@ -52,24 +52,26 @@
         </h1>
 
         <form th:action method="POST" class="flex flex-col gap-6" onsubmit="LoginForm__submit(this); return false;">
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">아이디</span>
-                </label>
-                <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus/>
-            </div>
+            <th:block th:if="${param.admin}">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">아이디</span>
+                    </label>
+                    <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus/>
+                </div>
 
-            <div class="form-control">
-                <label class="label">
-                    <span class="label-text">비빌번호</span>
-                </label>
-                <input type="password" name="password" placeholder="비빌번호" class="input input-bordered"/>
-            </div>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">비빌번호</span>
+                    </label>
+                    <input type="password" name="password" placeholder="비빌번호" class="input input-bordered"/>
+                </div>
 
-            <button id="btn-login-1" class="btn btn-block btn-primary gap-1">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                <span>로그인</span>
-            </button>
+                <button id="btn-login-1" class="btn btn-block btn-primary gap-1">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span>로그인</span>
+                </button>
+            </th:block>
 
             <a href="/oauth2/authorization/kakao" class="btn btn-block btn-outline gap-1">
                 <i class="fa-solid fa-comment text-[color:#ffe812]"></i>
@@ -86,11 +88,11 @@
                 <span>구글 로그인</span>
             </a>
 
-            <div class="flex flex-wrap justify-center">
-                <a href="/member/join" class="btn btn-link">회원가입</a>
-                <a href="#" class="btn btn-link">아이디찾기</a>
-                <a href="#" class="btn btn-link">비밀번호찾기</a>
-            </div>
+<!--            <div class="flex flex-wrap justify-center">-->
+<!--                <a href="/member/join" class="btn btn-link">회원가입</a>-->
+<!--                <a href="#" class="btn btn-link">아이디찾기</a>-->
+<!--                <a href="#" class="btn btn-link">비밀번호찾기</a>-->
+<!--            </div>-->
         </form>
     </div>
 </main>
