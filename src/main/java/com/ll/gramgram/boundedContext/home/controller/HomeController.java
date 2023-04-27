@@ -1,5 +1,6 @@
 package com.ll.gramgram.boundedContext.home.controller;
 
+import com.ll.gramgram.base.rq.Rq;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,9 +12,16 @@ import java.util.Enumeration;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
+    private final Rq rq;
     @GetMapping("/")
     public String showMain() {
+        if (rq.isLogout()) return "redirect:/usr/member/login";
         return "usr/home/main";
+    }
+
+    @GetMapping("/usr/home/about")
+    public String showAbout() {
+        return "usr/home/about";
     }
 
     @GetMapping("/debugSession")
