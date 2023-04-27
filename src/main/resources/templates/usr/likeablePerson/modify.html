@@ -9,9 +9,14 @@
 <main layout:fragment="main" class="flex-grow flex items-center justify-center">
 
     <script th:inline="javascript">
-        const myInstaMemberUsername = /*[[ ${@rq.member.instaMember.username} ]]*/ null;
+        const inputValue__attractiveTypeCode = /*[[ ${likeablePerson.attractiveTypeCode} ]]*/ null;
 
         function ModifyLikeForm__submit(form) {
+            if ( inputValue__attractiveTypeCode == form.attractiveTypeCode.value ) {
+                toastWarning('기존 호감사유와 다른 호감사유로 변경해주세요.');
+                return;
+            }
+
             form.submit(); // 폼 발송
         }
     </script>
@@ -41,6 +46,13 @@
                     <span>https://instagram.com/</span><span th:text="${likeablePerson.toInstaMember.username}"
                                                              class="text-red-300"></span>
                 </a>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">기존 호감사유</span>
+                </label>
+                <div class="badge badge-primary" th:text="${likeablePerson.attractiveTypeDisplayName}"></div>
             </div>
 
             <div class="form-control">
@@ -76,7 +88,6 @@
 
                     <script th:inline="javascript">
                         // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
-                        const inputValue__attractiveTypeCode = /*[[ ${likeablePerson.attractiveTypeCode} ]]*/ null;
                         $(`input[name=attractiveTypeCode][value=${inputValue__attractiveTypeCode}]:last`).prop('checked', true);
                     </script>
                 </div>
