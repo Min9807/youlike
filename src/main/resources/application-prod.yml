@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: INFO
+    com.ll.gramgram: INFO
+    org.hibernate.orm.jdbc.bind: INFO
+    org.hibernate.orm.jdbc.extract: INFO
