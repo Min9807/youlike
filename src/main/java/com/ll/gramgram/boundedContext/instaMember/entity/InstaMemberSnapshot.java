@@ -21,6 +21,8 @@ public class InstaMemberSnapshot extends InstaMemberBase {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    private String eventTypeCode;
+
     private String username;
 
     @ToString.Exclude
