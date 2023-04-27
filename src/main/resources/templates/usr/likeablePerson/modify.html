@@ -88,7 +88,9 @@
 
                     <script th:inline="javascript">
                         // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
-                        $(`input[name=attractiveTypeCode][value=${inputValue__attractiveTypeCode}]:last`).prop('checked', true);
+                        $(`input[name=attractiveTypeCode][value=${inputValue__attractiveTypeCode}]:last`)
+                            .prop('checked', true)
+                            .prop('disabled', true);
                     </script>
                 </div>
 
