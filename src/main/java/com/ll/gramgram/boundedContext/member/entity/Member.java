@@ -43,11 +43,15 @@ public class Member {
 
         grantedAuthorities.add(new SimpleGrantedAuthority("member"));
 
-        if ("admin".equals(username)) {
+        if (isAdmin()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
         }
 
         return grantedAuthorities;
+    }
+
+    public boolean isAdmin() {
+        return "admin".equals(username);
     }
 
     public boolean hasConnectedInstaMember() {

@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @PreAuthorize("hasAuthority('admin')")
 public class AdmHomeController {
     @GetMapping("")
+    public String showIndex() {
+        return "redirect:/adm/home/main";
+    }
+
+    @GetMapping("/home/main")
     public String showMain() {
         return "adm/home/main";
     }

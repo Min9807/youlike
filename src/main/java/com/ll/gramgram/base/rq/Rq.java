@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -39,6 +40,21 @@ public class Rq {
         } else {
             this.user = null;
         }
+    }
+
+    public boolean isAdmin() {
+        if (isLogout()) return false;
+
+        return getMember().isAdmin();
+    }
+
+    public boolean isRefererAdminPage() {
+        SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+
+        if (savedRequest == null) return false;
+
+        String referer = savedRequest.getRedirectUrl();
+        return referer != null && referer.contains("/adm");
     }
 
     // 로그인 되어 있는지 체크

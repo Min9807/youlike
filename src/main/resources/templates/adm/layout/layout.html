@@ -1,0 +1,40 @@
+<html layout:decorate="~{common/layout.html}">
+
+<body>
+
+<header layout:fragment="header" class="sticky top-0 z-50">
+    <div class="navbar max-w-2xl mx-auto bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h7"/>
+                    </svg>
+                </label>
+                <ul tabindex="0"
+                    class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="/usr/home/about"><i class="fa-solid fa-heart"></i> 사용자 페이지</a></li>
+                    <li>
+                        <a href="javascript:;" onclick="$(this).next().submit();">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃
+                        </a>
+                        <form class="!hidden" hidden th:action="|/usr/member/logout|" method="POST"></form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+
+        </div>
+        <div class="navbar-end">
+            <a href="/" class="btn btn-ghost normal-case text-xl">
+                <span>gramgram admin</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+</body>
+</html>

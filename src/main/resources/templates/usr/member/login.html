@@ -52,7 +52,7 @@
         </h1>
 
         <form th:action method="POST" class="flex flex-col gap-6" onsubmit="LoginForm__submit(this); return false;">
-            <th:block th:if="${param.admin}">
+            <th:block th:if="${@rq.refererAdminPage}">
                 <div class="form-control">
                     <label class="label">
                         <span class="label-text">아이디</span>
