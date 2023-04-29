@@ -12,6 +12,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M4 6h16M4 12h16M4 18h7"/>
                     </svg>
+                    <i class="fa-solid fa-bars"></i>
                 </label>
                 <ul tabindex="0"
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -22,13 +23,15 @@
 <!--                        </li>-->
                     <li th:if="${@rq.admin}"><a href="/adm/home/main"><i class="fa-solid fa-gauge"></i> 관리자 페이지</a>
                     </li>
+                    <li th:if="${@rq.login}"><a href="/member/pop"><i class="fa-solid fa-chart-line"></i> 내 인기</a>
+                    </li>
                     <li th:if="${@rq.login}">
-                        <a href="javascript:;" onclick="$(this).next().submit();">
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃
+                        <a href="/likeablePerson/toList">
+                            <i class="fa-solid fa-list-ul"></i> 내가 받은 호감
                         </a>
-                        <form class="!hidden" hidden th:action="|/member/logout|" method="POST"></form>
                     </li>
                     <li th:if="${@rq.login}"><a href="/member/me"><i class="fa-solid fa-user"></i> 내 정보</a></li>
+                    <div th:if="${@rq.login}" class="divider"></div>
                     <li th:if="${@rq.login}"><a href="/likeablePerson/add"><i
                             class="fa-solid fa-heart-circle-plus"></i> 호감표시</a></li>
                     <li th:if="${@rq.login}"><a href="/likeablePerson/list"><i class="fa-solid fa-list-ol"></i> 호감목록</a>
@@ -39,29 +42,42 @@
                             인스타 아이디 입력
                         </a>
                     </li>
-                    <li><a href="/usr/home/about"><i class="fa-solid fa-heart"></i> 그램그램이란?</a>
+                    <div th:if="${@rq.login}" class="divider"></div>
+                    <li><a href="/home/about"><i class="fa-solid fa-circle-info"></i> 그램그램이란?</a>
+                    </li>
+                    <li th:if="${@rq.login}">
+                        <a href="javascript:;" onclick="$(this).next().submit();">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃
+                        </a>
+                        <form class="!hidden" hidden th:action="|/member/logout|" method="POST"></form>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="navbar-center">
             <a href="/" class="btn btn-ghost normal-case text-xl">
-                <span class="hidden min-[341px]:inline">gramgram</span>
+                <span class="hidden min-[341px]:inline">
+                    gram
+                    <i class="fa-solid fa-heart text-red-300"></i>
+                    gram
+                </span>
                 <span class="min-[341px]:hidden">gg</span>
+                &nbsp;
             </a>
         </div>
         <div class="navbar-end">
-            <a href="/member/me" class="btn btn-ghost gap-1" th:if="${@rq.login}">
-                <i class="fa-solid fa-user"></i>
+            <a href="/member/pop" class="btn btn-ghost gap-1" th:if="${@rq.login}">
+                <i class="fa-solid fa-chart-line"></i>
             </a>
-            <a href="/notification/list" class="btn btn-ghost btn-circle">
+            <a href="/notification/list" class="btn btn-ghost btn-circle" th:if="${@rq.login}">
                 <div class="indicator">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                    </svg>
+                    <i class="fa-regular fa-bell"></i>
                     <span th:if="${@rq.login}" class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </a>
+            <a href="/home/about" class="btn btn-ghost btn-circle" th:if="${@rq.logout}">
+                <div class="indicator">
+                    <i class="fa-solid fa-circle-info"></i>
                 </div>
             </a>
         </div>

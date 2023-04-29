@@ -25,59 +25,64 @@
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">인스타 아이디</span>
-                        </div>
-                        <div class="mt-2">
                             <i class="fa-brands fa-instagram"></i>
-                            <span th:text="${@rq.member.instaMember.username}"></span>
+                            인스타 아이디
+                        </div>
+                        <div class="mt-2">
+                            <span class="badge badge-primary" th:text="${@rq.member.instaMember.username}"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">성별</span>
-                        </div>
-                        <div class="mt-2">
                             <i class="fa-solid fa-person-half-dress"></i>
-                            <span th:text="${@rq.member.instaMember.genderDisplayName}"></span>
+                            성별
+                        </div>
+                        <div class="mt-2">
+                            <span class="badge badge-primary"
+                                  th:utext="${@rq.member.instaMember.genderDisplayNameWithIcon}"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">이름</span>
-                        </div>
-                        <div class="mt-2">
-                            <i class="fa-solid fa-user"></i>
-                            <span th:text="${@rq.member.nickname}"></span>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <div>
-                            <span class="badge badge-primary">가입</span>
-                        </div>
-                        <div class="mt-2">
                             <i class="fa-regular fa-clock"></i>
-                            <span th:text="${#temporals.format(@rq.member.createDate, 'yy.MM.dd')}"></span>
+                            가입
+                        </div>
+                        <div class="mt-2">
+                            <span class="badge badge-primary"
+                                  th:text="${#temporals.format(@rq.member.createDate, 'yy.MM.dd')}"></span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <a href="/member/pop" class="mt-10 mb-4 block">
+            <i class="fa-solid fa-chart-line"></i>
+            내 인기
+
+            <span class="float-right text-sm">
+                <i class="fa-solid fa-angles-right"></i>
+                자세히 보기
+            </span>
+        </a>
+
+        <div class="flex flex-col gap-4 mt-4">
             <div class="card bg-base-100 shadow-xl">
                 <div class="card-body">
                     <h2 class="card-title">
-                        <i class="fa-solid fa-circle-info"></i> 호감사유별 인기
+                        <i class="fa-solid fa-check"></i> 호감사유별 인기
                     </h2>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">전체</span>
+                            <i class="fa-solid fa-heart"></i>
+                            전체
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-heart"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likes, 0, 'COMMA')}명|"></span>
+                            &nbsp;<span class="badge badge-primary"
+                                        th:text="|${#numbers.formatInteger(@rq.member.instaMember.likes, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
@@ -85,31 +90,34 @@
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">외모</span>
+                            <i class="fa-solid fa-person-rays"></i>
+                            외모
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-person-rays"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByAttractionTypeCode1, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByAttractionTypeCode1, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">성격</span>
+                            <i class="fa-regular fa-face-smile"></i>
+                            성격
                         </div>
                         <div class="mt-2">
-                            <i class="fa-regular fa-face-smile"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByAttractionTypeCode2, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByAttractionTypeCode2, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">능력</span>
+                            <i class="fa-solid fa-people-roof"></i>
+                            능력
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-people-roof"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByAttractionTypeCode3, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByAttractionTypeCode3, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
                 </div>
@@ -123,11 +131,12 @@
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">전체</span>
+                            <i class="fa-solid fa-heart"></i>
+                            전체
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-heart"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likes, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likes, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
@@ -135,21 +144,23 @@
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">여성</span>
+                            <i class="fa-solid fa-person-dress"></i>
+                            여성
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-person-dress"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWoman, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWoman, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">남성</span>
+                            <i class="fa-solid fa-person"></i>
+                            남성
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-person"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderMan, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderMan, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
                 </div>
@@ -163,31 +174,34 @@
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">외모</span>
+                            <i class="fa-solid fa-person-rays"></i>
+                            외모
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-person-rays"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWomanAndAttractiveTypeCode1, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWomanAndAttractiveTypeCode1, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">성격</span>
+                            <i class="fa-regular fa-face-smile"></i>
+                            성격
                         </div>
                         <div class="mt-2">
-                            <i class="fa-regular fa-face-smile"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWomanAndAttractiveTypeCode2, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWomanAndAttractiveTypeCode2, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">능력</span>
+                            <i class="fa-solid fa-people-roof"></i>
+                            능력
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-people-roof"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWomanAndAttractiveTypeCode3, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderWomanAndAttractiveTypeCode3, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
                 </div>
@@ -201,41 +215,49 @@
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">외모</span>
+                            <i class="fa-solid fa-person-rays"></i>
+                            외모
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-person-rays"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderManAndAttractiveTypeCode1, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderManAndAttractiveTypeCode1, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">성격</span>
+                            <i class="fa-regular fa-face-smile"></i>
+                            성격
                         </div>
                         <div class="mt-2">
-                            <i class="fa-regular fa-face-smile"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderManAndAttractiveTypeCode2, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderManAndAttractiveTypeCode2, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">능력</span>
+                            <i class="fa-solid fa-people-roof"></i>
+                            능력
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-people-roof"></i>&nbsp;<span
-                                th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderManAndAttractiveTypeCode3, 0, 'COMMA')}명|"></span>
+                            <span class="badge badge-primary"
+                                  th:text="|${#numbers.formatInteger(@rq.member.instaMember.likesCountByGenderManAndAttractiveTypeCode3, 0, 'COMMA')}명|"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h1 class="mt-10 mb-4">
+        <a href="/likeablePerson/toList" class="mt-10 mb-4 block">
             <i class="fa-solid fa-fire"></i>
             최근에 받은 호감
-        </h1>
+
+            <span class="float-right text-sm">
+                <i class="fa-solid fa-angles-right"></i>
+                자세히 보기
+            </span>
+        </a>
 
         <div class="text-center mt-10" th:if="${#lists.isEmpty(@rq.member.instaMember.toLikeablePeople)}">
             <i class="fa-regular fa-face-laugh"></i> 최근에 받은 호감이 없습니다.
@@ -245,43 +267,55 @@
             <div class="card bg-base-100 shadow-xl"
                  th:each="likeablePerson, i: ${@rq.member.instaMember.toLikeablePeople}">
                 <div class="card-body">
-                    <h2 class="card-title">
+                    <a href="#" class="card-title">
                         <span th:text="|No. ${i.index + 1} / ${i.size}|"></span>
-                    </h2>
+                    </a>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">호감표시</span>
+                            <i class="fa-regular fa-face-laugh-beam"></i> 호감표시자
                         </div>
                         <div class="mt-2">
+                            <svg th:data-jdenticon-value="|${likeablePerson.jdenticon}|" width="80" height="80"></svg>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div>
                             <i class="fa-regular fa-clock"></i>
-                            <span th:text="${#temporals.format(likeablePerson.createDate, 'yy.MM.dd HH:mm')}"></span>
+                            호감표시
+                        </div>
+                        <div class="mt-2">
+                            <span class="badge badge-primary"
+                                  th:text="${#temporals.format(likeablePerson.createDate, 'yy.MM.dd HH:mm')}"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">성별</span>
+                            <i class="fa-solid fa-person-half-dress"></i> 성별
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-person-half-dress"></i>
-                            <span th:text="${likeablePerson.fromInstaMember.genderDisplayName}"></span>
+                            <span class="badge badge-primary"
+                                  th:utext="${likeablePerson.fromInstaMember.genderDisplayNameWithIcon}"></span>
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div>
-                            <span class="badge badge-primary">호감사유</span>
+                            <i class="fa-solid fa-check"></i>
+                            호감사유
                         </div>
                         <div class="mt-2">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <span th:text="${likeablePerson.attractiveTypeDisplayName}"></span>
+                            <span class="badge badge-primary"
+                                  th:utext="${likeablePerson.attractiveTypeDisplayNameWithIcon}"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </main>
 
 
