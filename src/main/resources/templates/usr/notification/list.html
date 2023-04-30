@@ -1,28 +1,98 @@
 <html layout:decorate="~{usr/layout/layout.html}">
 
 <head>
-  <title>알림</title>
+  <title>당신이 좋아하는 사람들</title>
 </head>
 
 <body>
 
 <main layout:fragment="main" class="flex-grow flex items-center justify-center">
   <div class="max-w-2xl w-full px-4">
-    <h1 class="mb-4">
-      <i class="fa-regular fa-bell"></i>
-      알림
-    </h1>
+    <div th:unless="${@rq.member.hasConnectedInstaMember}" th:include="part/needToConnect::base"></div>
 
-    <div class="text-center mt-10" th:if="${#lists.isEmpty(notifications)}">
-      <i class="fa-regular fa-face-laugh"></i> 최근에 받은 알림이 없습니다.
+    <th:block th:if="${@rq.member.hasConnectedInstaMember}">
+      <div th:unless="${!#lists.isEmpty(likeablePeople)}" class="text-center">
+        <div><i class="fa-regular fa-face-laugh"></i> 목록이 비어있습니다. 당신의 호감을 표시해주세요.</div>
+      </div>
+
+      <h1 class="mb-4" th:if="${!#lists.isEmpty(likeablePeople)}">
+        <i class="fa-solid fa-list-ol"></i>
+        호감목록
+      </h1>
+
+      <ul th:if="${!#lists.isEmpty(likeablePeople)}" class="flex flex-col gap-4">
+        <li th:each="likeablePerson: ${likeablePeople}">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">
+                <span><i class="fa-brands fa-instagram"></i></span>
+                <span th:data-test="|toInstaMember_username=${likeablePerson.toInstaMember.username}|"
+                      th:text="${likeablePerson.toInstaMember.username}"></span>
+              </h2>
+              <a th:href="|https://instagram.com/${likeablePerson.toInstaMember.username}|"
+                 target="_blank" class="block text-sm break-all text-blue-400 underline">
+                <span>https://instagram.com/</span><span class="text-red-400"
+                                                         th:text="${likeablePerson.toInstaMember.username}"></span>
+              </a>
+
+              <div class="mt-4 mb-2 flex flex-col gap-2">
+                <div>
+                  <i class="fa-regular fa-clock"></i>
+                  호감표시
+                </div>
+                <div class="mt-2">
+                                    <span class="badge badge-primary"
+                                          th:text="${#temporals.format(likeablePerson.createDate, 'yy.MM.dd HH:mm')}"></span>
+                </div>
+              </div>
+
+              <div class="mt-4 mb-2 flex flex-col gap-2">
+                <div>
+                  <i class="fa-solid fa-check"></i>
+                  호감사유
+                </div>
+                <div class="badge badge-primary"
+                     th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
+                     th:utext="${likeablePerson.attractiveTypeDisplayNameWithIcon}"></div>
+              </div>
+
+              <div class="mt-4 mb-2 flex flex-col gap-2">
+                <div>
+                  <i class="fa-regular fa-face-laugh-beam"></i>
+                  상대방에게 보여지는 내 사진
+                </div>
+                <svg th:data-jdenticon-value="|${likeablePerson.jdenticon}|" width="120"
+                     height="120"></svg>
+              </div>
+
+              <div class="card-actions justify-center">
+                <a th:href="@{|modify/${likeablePerson.id}|}" class="btn btn-sm btn-outline">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  &nbsp;
+                  호감사유 변경
+                </a>
+                <a class="btn btn-sm btn-outline" href="javascript:;"
+                   onclick="if ( confirm('정말로 취소하시겠습니까?') ) $(this).next().submit();">
+                  <i class="fa-solid fa-user-slash"></i>
+                  &nbsp;
+                  호감취소
+                </a>
+                <form hidden th:action="@{|/likeablePerson/${likeablePerson.id}|}" method="POST">
+                  <input type="hidden" name="_method" value="delete">
+                </form>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </th:block>
+
+    <div class="text-center mt-4">
+      <a th:if="${@rq.member.hasConnectedInstaMember}" href="like" class="btn btn-link">호감표시</a>
+      <a th:if="${@rq.member.hasConnectedInstaMember}" href="/member/me" class="btn btn-link">내 정보</a>
     </div>
-
-
   </div>
-
 </main>
-
-
 </body>
 
 </html>
