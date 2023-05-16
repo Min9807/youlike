@@ -1,3 +1,10 @@
+server:
+  port: 443
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store-password: 123456
+    key-store: keystore.p12
 spring:
   mvc:
     hiddenmethod:
@@ -16,25 +23,24 @@ spring:
       client:
         registration:
           kakao:
-            clientId: "카카오 API ID 넣기"
             scope:
             client-name: Kakao
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
             client-authentication-method: POST
           google:
-            client-id: "구글 API ID 넣기"
-            client-secret: "시크릿 key 넣기"
-            scope:
-              - profile
-              - email
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            client-name: Google
+            scope: profile
           naver:
-            client-id: "네이버 API ID 넣기"
-            client-secret: "시크릿 key 넣기"
-            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
-            authorization-grant-type: authorization_code
             scope:
             client-name: Naver
+            authorization-grant-type: authorization_code
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+          facebook:
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            client-name: Facebook
+            scope:
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
