@@ -108,4 +108,22 @@ public class Rq {
     private String msgWithTtl(String msg) {
         return Ut.url.encode(msg) + ";ttl=" + new Date().getTime();
     }
+
+
+    public void setSessionAttr(String name, String value) {
+        session.setAttribute(name, value);
+    }
+
+    public <T> T getSessionAttr(String name, T defaultValue) {
+        try {
+            return (T) session.getAttribute(name);
+        } catch (Exception ignored) {
+        }
+
+        return defaultValue;
+    }
+
+    public void removeSessionAttr(String name) {
+        session.removeAttribute(name);
+    }
 }

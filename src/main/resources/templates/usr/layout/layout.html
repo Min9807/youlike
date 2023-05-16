@@ -37,9 +37,9 @@
                     <li th:if="${@rq.login}"><a href="/likeablePerson/list"><i class="fa-solid fa-list-ol"></i> 호감목록</a>
                     </li>
                     <li th:if="${@rq.login}" th:unless="${@rq.member.hasConnectedInstaMember}">
-                        <a href="/usr/instaMember/connect">
+                        <a href="/instaMember/connectByApi">
                             <i class="fa-brands fa-instagram"></i>
-                            인스타 아이디 입력
+                            인스타 아이디 연결
                         </a>
                     </li>
                     <div th:if="${@rq.login}" class="divider"></div>

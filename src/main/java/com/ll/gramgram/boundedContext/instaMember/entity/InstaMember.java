@@ -30,9 +30,18 @@ public class InstaMember extends InstaMemberBase {
     private LocalDateTime createDate;
     @LastModifiedDate
     private LocalDateTime modifyDate;
+    @Setter
     @Column(unique = true)
     private String username;
 
+    @Setter
+    @Column(unique = true)
+    private String oauthId;
+
+    @Setter
+    private String accessToken;
+
+    @Setter
     String gender;
 
     @OneToMany(mappedBy = "fromInstaMember", cascade = {CascadeType.ALL})
