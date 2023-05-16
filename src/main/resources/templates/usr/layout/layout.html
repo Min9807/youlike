@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <div th:if="${@rq.login}" class="divider"></div>
-                    <li><a href="/home/about"><i class="fa-solid fa-circle-info"></i> 그램그램이란?</a>
+                    <li><a href="/usr/home/about"><i class="fa-solid fa-circle-info"></i> 그램그램이란?</a>
                     </li>
                     <li th:if="${@rq.login}">
                         <a href="javascript:;" onclick="$(this).next().submit();">
@@ -75,7 +75,7 @@
                     <span th:if="${@rq.login}" class="badge badge-xs badge-primary indicator-item"></span>
                 </div>
             </a>
-            <a href="/home/about" class="btn btn-ghost btn-circle" th:if="${@rq.logout}">
+            <a href="/usr/home/about" class="btn btn-ghost btn-circle" th:if="${@rq.logout}">
                 <div class="indicator">
                     <i class="fa-solid fa-circle-info"></i>
                 </div>

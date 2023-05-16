@@ -10,3 +10,7 @@ html > body {
     text-underline-position: under;
     word-break: keep-all;
 }
+
+html > body .label-text {
+    font-size: 1rem;
+}

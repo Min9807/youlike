@@ -52,17 +52,23 @@
         </h1>
 
         <form th:action method="POST" class="flex flex-col gap-6" onsubmit="LoginForm__submit(this); return false;">
-            <th:block th:if="${@rq.refererAdminPage}">
+            <th:block th:if="${@rq.refererAdminPage or param.admin != null}">
                 <div class="form-control">
                     <label class="label">
-                        <span class="label-text">아이디</span>
+                        <span class="label-text">
+                            <i class="fa-regular fa-id-badge"></i>
+                            아이디
+                        </span>
                     </label>
                     <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus/>
                 </div>
 
                 <div class="form-control">
                     <label class="label">
-                        <span class="label-text">비빌번호</span>
+                        <span class="label-text">
+                            <i class="fa-solid fa-key"></i>
+                            비빌번호
+                        </span>
                     </label>
                     <input type="password" name="password" placeholder="비빌번호" class="input input-bordered"/>
                 </div>
@@ -89,7 +95,12 @@
             </a>
 
             <div class="flex flex-wrap justify-center">
-                <a href="/usr/home/about" class="btn btn-link">그램그램이란?</a>
+                <a href="/usr/home/about" class="btn btn-link">
+                    <span>
+                        <i class="fa-solid fa-circle-info mr-1"></i>
+                        그램그램이란?&nbsp;
+                    </span>
+                </a>
             </div>
 <!--            <div class="flex flex-wrap justify-center">-->
 <!--                <a href="/member/join" class="btn btn-link">회원가입</a>-->

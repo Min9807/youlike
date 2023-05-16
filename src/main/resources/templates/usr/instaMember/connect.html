@@ -46,7 +46,10 @@
         <form class="flex flex-col gap-6" method="POST" th:action onsubmit="ConnectForm__submit(this); return false;">
             <div class="form-control">
                 <label class="label">
-                    <span class="label-text">인스타 아이디</span>
+                    <span class="label-text">
+                        <i class="fa-brands fa-instagram"></i>
+                        인스타 아이디
+                    </span>
                 </label>
                 <input type="text" name="username" placeholder="인스타 아이디" class="input input-bordered" autofocus
                        onchange="$(this).keyup();"
@@ -67,7 +70,10 @@
 
             <div class="form-control">
                 <label class="label">
-                    <span class="label-text">성별</span>
+                    <span class="label-text">
+                        <i class="fa-solid fa-person-half-dress"></i>
+                        성별
+                    </span>
                 </label>
 
                 <!-- 라벨을 클릭하면 라벨의 하위요소인 버튼(체크,라디오,일반 등)이 클릭되는 효과) -->

@@ -64,8 +64,18 @@
     </th:block>
 
     <div class="text-center mt-4">
-      <a th:if="${@rq.member.hasConnectedInstaMember}" href="add" class="btn btn-link">호감표시</a>
-      <a th:if="${@rq.member.hasConnectedInstaMember}" href="/member/me" class="btn btn-link">내 정보</a>
+      <a th:if="${@rq.member.hasConnectedInstaMember}" href="add" class="btn btn-link">
+                    <span>
+                        <i class="fa-solid fa-list-ol mr-1"></i>
+                        호감표시&nbsp;
+                    </span>
+      </a>
+      <a th:if="${@rq.member.hasConnectedInstaMember}" href="/member/me" class="btn btn-link">
+                    <span>
+                        <i class="fa-solid fa-user mr-1"></i>
+                        내 정보&nbsp;
+                    </span>
+      </a>
     </div>
   </div>
 </main>
