@@ -61,8 +61,8 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("showAdd"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string(containsString("먼저 본인의 인스타 아이디를 입력해주세요.".stripIndent().trim())))
-        ;
+                .andExpect(content().string(containsString("먼저 본인의 인스타 아이디를 입력해주세요.".stripIndent().trim())));
+
     }
 
     @Test
@@ -94,7 +94,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(content().string(containsString("""
                         id="btn-like-1"
                         """.stripIndent().trim())));
-        ;
+
     }
 
     @Test
@@ -115,7 +115,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("add"))
                 .andExpect(status().is3xxRedirection());
-        ;
+
     }
 
     @Test
@@ -136,7 +136,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("add"))
                 .andExpect(status().is3xxRedirection());
-        ;
+
     }
 
     @Test
@@ -165,7 +165,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(content().string(containsString("""
                         data-test="toInstaMember_attractiveTypeDisplayName=성격"
                         """.stripIndent().trim())));
-        ;
+
     }
 
     @Test
@@ -185,8 +185,8 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("delete"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrlPattern("/likeablePerson/list**"))
-        ;
+                .andExpect(redirectedUrlPattern("/likeablePerson/list**"));
+
 
         assertThat(likeablePersonService.findById(1L).isPresent()).isEqualTo(false);
     }
@@ -251,7 +251,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("add"))
                 .andExpect(status().is4xxClientError());
-        ;
+
     }
 
     @Test
@@ -272,7 +272,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("add"))
                 .andExpect(status().is4xxClientError());
-        ;
+
     }
 
     @Test
@@ -293,7 +293,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("add"))
                 .andExpect(status().is4xxClientError());
-        ;
+
     }
 
     @Test
@@ -321,7 +321,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("add"))
                 .andExpect(status().is4xxClientError());
-        ;
+
     }
 
     @Test
@@ -383,7 +383,7 @@ public class LikeablePersonControllerTests {
                 .andExpect(content().string(containsString("""
                         id="btn-modify-like-1"
                         """.stripIndent().trim())));
-        ;
+
     }
 
     @Test
@@ -404,6 +404,6 @@ public class LikeablePersonControllerTests {
                 .andExpect(handler().handlerType(LikeablePersonController.class))
                 .andExpect(handler().methodName("modify"))
                 .andExpect(status().is3xxRedirection());
-        ;
+
     }
 }

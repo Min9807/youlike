@@ -41,6 +41,8 @@ public class LikeablePerson {
 
     private int attractiveTypeCode; // 매력포인트(1=외모, 2=성격, 3=능력)
 
+    private LocalDateTime modifyUnlockDate;
+
     public String getAttractiveTypeDisplayName() {
         return switch (attractiveTypeCode) {
             case 1 -> "외모";
