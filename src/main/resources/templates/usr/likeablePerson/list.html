@@ -35,19 +35,46 @@
                                                          th:text="${likeablePerson.toInstaMember.username}"></span>
               </a>
 
-              <div class="mt-4 mb-2 flex flex-col items-center gap-2">
-                <div class="badge badge-primary">호감사유</div>
-                <div th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
+              <div class="mt-4 mb-2 flex flex-col gap-2">
+                <div>
+                  <i class="fa-regular fa-clock"></i>
+                  호감표시
+                </div>
+                <div class="mt-2">
+                                    <span class="badge badge-primary"
+                                          th:text="${#temporals.format(likeablePerson.createDate, 'yy.MM.dd HH:mm')}"></span>
+                </div>
+              </div>
+
+              <div class="mt-4 mb-2 flex flex-col gap-2">
+                <div>
+                  <i class="fa-solid fa-check"></i>
+                  호감사유
+                </div>
+                <div class="badge badge-primary"
+                     th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
                      th:utext="${likeablePerson.attractiveTypeDisplayNameWithIcon}"></div>
               </div>
 
+              <div class="mt-4 mb-2 flex flex-col gap-2">
+                <div>
+                  <i class="fa-regular fa-face-laugh-beam"></i>
+                  상대방에게 보여지는 내 사진
+                </div>
+                <svg th:data-jdenticon-value="|${likeablePerson.jdenticon}|" width="120"
+                     height="120"></svg>
+              </div>
+
               <div class="card-actions justify-center">
-                <a th:href="@{|modify/${likeablePerson.id}|}" class="btn btn-sm btn-outline">
+                <a th:href="@{|modify/${likeablePerson.id}|}" class="btn btn-sm btn-outline"
+                   th:classappend="${!likeablePerson.modifyUnlocked ? 'btn-disabled' : ''}">
                   <i class="fa-solid fa-pen-to-square"></i>
                   &nbsp;
                   호감사유 변경
                 </a>
-                <a class="btn btn-sm btn-outline" href="javascript:"
+                <a class="btn btn-sm btn-outline"
+                   th:classappend="${!likeablePerson.modifyUnlocked ? 'btn-disabled' : ''}"
+                   href="javascript:"
                    onclick="if ( confirm('정말로 취소하시겠습니까?') ) $(this).next().submit();">
                   <i class="fa-solid fa-user-slash"></i>
                   &nbsp;
@@ -56,6 +83,12 @@
                 <form hidden th:action="@{|/likeablePerson/${likeablePerson.id}|}" method="POST">
                   <input type="hidden" name="_method" value="delete">
                 </form>
+              </div>
+              <div th:unless="${likeablePerson.modifyUnlocked}" class="text-center text-gray-500 text-sm mt-2">
+                <span class="text-red-400">호감사유 변경</span>과 <span
+                      class="text-red-400">호감취소</span>는 <span
+                      class="badge badge-primary"
+                      th:text="${likeablePerson.modifyUnlockDateRemainStrHuman}"></span>에 가능합니다.
               </div>
             </div>
           </div>
