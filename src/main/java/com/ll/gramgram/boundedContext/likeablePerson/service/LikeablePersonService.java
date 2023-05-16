@@ -129,7 +129,9 @@ public class LikeablePersonService {
         if (likeablePerson == null) return RsData.of("F-1", "이미 삭제되었습니다.");
 
         if (!Objects.equals(actor.getInstaMember().getId(), likeablePerson.getFromInstaMember().getId()))
-            return RsData.of("F-2", "권한이 없습니다.");
+            return RsData.of("F-2", "삭제할 권한이 없습니다.");
+
+        if (!likeablePerson.isModifyUnlocked()) return RsData.of("F-3", "아직 취소할 수 없습니다. %s에는 가능합니다.".formatted(likeablePerson.getModifyUnlockDateRemainStrHuman()));
 
         return RsData.of("S-1", "삭제가능합니다.");
     }
@@ -160,11 +162,11 @@ public class LikeablePersonService {
         InstaMember fromInstaMember = actor.getInstaMember();
 
         if (!Objects.equals(likeablePerson.getFromInstaMember().getId(), fromInstaMember.getId())) {
-            return RsData.of("F-2", "해당 호감표시를 취소할 권한이 없습니다.");
+            return RsData.of("F-2", "해당 호감표시를 수정할 권한이 없습니다.");
         }
+        if (!likeablePerson.isModifyUnlocked()) return RsData.of("F-3", "아직 수정할 수 없습니다. %s에는 가능합니다.".formatted(likeablePerson.getModifyUnlockDateRemainStrHuman()));
 
-
-        return RsData.of("S-1", "호감표시취소가 가능합니다.");
+        return RsData.of("S-1", "호감표시수정이 가능합니다.");
     }
 
     private void modifyAttractionTypeCode(LikeablePerson likeablePerson, int attractiveTypeCode) {

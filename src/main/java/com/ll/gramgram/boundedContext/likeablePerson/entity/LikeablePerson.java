@@ -57,7 +57,7 @@ public class LikeablePerson {
     }
 
     public String getModifyUnlockDateRemainStrHuman() {
-        return "2시간 16분";
+        return Ut.time.diffFormat1Human(LocalDateTime.now(), modifyUnlockDate);
     }
 
     public RsData updateAttractionTypeCode(int attractiveTypeCode) {

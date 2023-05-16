@@ -52,6 +52,7 @@ public class InstaMember extends InstaMemberBase {
 
     @OneToMany(mappedBy = "toInstaMember", cascade = {CascadeType.ALL})
     @OrderBy("id desc")
+    @LazyCollection(LazyCollectionOption.EXTRA)
     @Builder.Default
     private List<LikeablePerson> toLikeablePeople = new ArrayList<>();
 
