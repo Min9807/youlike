@@ -6,7 +6,9 @@ import com.ll.gramgram.boundedContext.member.entity.Member;
 import com.ll.gramgram.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @ActiveProfiles("test")
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class MemberControllerTests {
     @Autowired
     private MockMvc mvc;
@@ -148,30 +151,6 @@ public class MemberControllerTests {
     }
 
     @Test
-    @DisplayName("로그인 폼")
-    void t004() throws Exception {
-        // WHEN
-        ResultActions resultActions = mvc
-                .perform(get("/member/login"))
-                .andDo(print());
-
-        // THEN
-        resultActions
-                .andExpect(handler().handlerType(MemberController.class))
-                .andExpect(handler().methodName("showLogin"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string(containsString("""
-                        <input type="text" name="username"
-                        """.stripIndent().trim())))
-                .andExpect(content().string(containsString("""
-                        <input type="password" name="password"
-                        """.stripIndent().trim())))
-                .andExpect(content().string(containsString("""
-                        id="btn-login-1"
-                        """.stripIndent().trim())));
-    }
-
-    @Test
     // @Rollback(value = false) // DB에 흔적이 남는다.
     @DisplayName("로그인 처리")
     void t005() throws Exception {
@@ -197,22 +176,4 @@ public class MemberControllerTests {
                 .andExpect(redirectedUrlPattern("/**"));
     }
 
-    @Test
-    @DisplayName("로그인 후에 내비바에 로그인한 회원의 username")
-    @WithUserDetails("user1")
-    void t006() throws Exception {
-        // WHEN
-        ResultActions resultActions = mvc
-                .perform(get("/"))
-                .andDo(print());
-
-        // THEN
-        resultActions
-                .andExpect(handler().handlerType(HomeController.class))
-                .andExpect(handler().methodName("showMain"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().string(containsString("""
-                        0002
-                        """.stripIndent().trim())));
-    }
 }

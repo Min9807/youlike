@@ -60,3 +60,6 @@ logging:
     com.ll.gramgram: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
+custom:
+  likeablePerson:
+    modifyCoolTime: '#{60 * 60 * 3}'
