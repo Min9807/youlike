@@ -1,6 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://172.17.0.1:3306/gram__prod?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: lldjlocal
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        use_sql_comments: false
 logging:
   level:
     root: INFO
     com.ll.gramgram: INFO
     org.hibernate.orm.jdbc.bind: INFO
     org.hibernate.orm.jdbc.extract: INFO
+custom:
+  site:
+    baseUrl: https://www.youlike.site
