@@ -4,6 +4,20 @@ spring:
     url: jdbc:mariadb://172.17.0.1:3306/gram__prod?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: lldjlocal
     password: 1234
+  security:
+    oauth2:
+      client:
+        registration:
+          naver:
+            redirect-uri: 'https://www.youlike.site/{action}/oauth2/code/{registrationId}'
+          kakao:
+            redirect-uri: 'https://www.youlike.site/{action}/oauth2/code/{registrationId}'
+          google:
+            redirect-uri: 'https://www.youlike.site/{action}/oauth2/code/{registrationId}'
+          facebook:
+            redirect-uri: 'https://www.youlike.site/{action}/oauth2/code/{registrationId}'
+          instagram:
+            redirect-uri: 'https://www.youlike.site/{action}/oauth2/code/{registrationId}'
   jpa:
     hibernate:
       ddl-auto: update
