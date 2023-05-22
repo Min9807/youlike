@@ -72,13 +72,14 @@
             <a href="/notification/list" class="btn btn-ghost btn-circle" th:if="${@rq.login}">
                 <div class="indicator">
                     <i class="fa-regular fa-bell"></i>
-                    <span th:if="${@rq.login}" class="badge badge-xs badge-primary indicator-item"></span>
+                    <span data-test="hasUnreadNotifications" th:if="${@rq.hasUnreadNotifications}"
+                          class="badge badge-xs badge-primary indicator-item"></span>
                 </div>
             </a>
             <a href="/usr/home/about" class="btn btn-ghost btn-circle" th:if="${@rq.logout}">
-                <div class="indicator">
-                    <i class="fa-solid fa-circle-info"></i>
-                </div>
+
+                <i class="fa-solid fa-circle-info"></i>
+
             </a>
         </div>
     </div>

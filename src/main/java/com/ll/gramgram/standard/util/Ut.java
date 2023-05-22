@@ -20,7 +20,7 @@ public class Ut {
             String suffix = time1.isAfter(time2) ? "전" : "후";
 
             // 두개의 시간의 차이를 초로 환산
-            long diff = ChronoUnit.SECONDS.between(time1, time2);
+            long diff = Math.abs(ChronoUnit.SECONDS.between(time1, time2));
 
             long diffSeconds = diff % 60; // 초 부분만
             long diffMinutes = diff / (60) % 60; // 분 부분만
@@ -33,7 +33,7 @@ public class Ut {
             if (diffHours > 0) sb.append(diffHours).append("시간 ");
             if (diffMinutes > 0) sb.append(diffMinutes).append("분 ");
             if (diffSeconds > 0) sb.append(diffSeconds).append("초 ");
-
+            if ( sb.isEmpty() ) sb.append("1초 ");
             return sb.append(suffix).toString();
         }
     }

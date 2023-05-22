@@ -8,90 +8,58 @@
 
 <main layout:fragment="main" class="flex-grow flex items-center justify-center">
   <div class="max-w-2xl w-full px-4">
-    <div th:unless="${@rq.member.hasConnectedInstaMember}" th:include="part/needToConnect::base"></div>
+    <h1 class="mb-4">
+      <i class="fa-regular fa-bell"></i>
+      알림
+    </h1>
 
-    <th:block th:if="${@rq.member.hasConnectedInstaMember}">
-      <div th:unless="${!#lists.isEmpty(likeablePeople)}" class="text-center">
-        <div><i class="fa-regular fa-face-laugh"></i> 목록이 비어있습니다. 당신의 호감을 표시해주세요.</div>
-      </div>
+    <div class="text-center mt-10" th:if="${#lists.isEmpty(notifications)}">
+      <i class="fa-regular fa-face-laugh"></i> 최근에 받은 알림이 없습니다.
+    </div>
 
-      <h1 class="mb-4" th:if="${!#lists.isEmpty(likeablePeople)}">
-        <i class="fa-solid fa-list-ol"></i>
-        호감목록
-      </h1>
-
-      <ul th:if="${!#lists.isEmpty(likeablePeople)}" class="flex flex-col gap-4">
-        <li th:each="likeablePerson: ${likeablePeople}">
-          <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-              <h2 class="card-title">
-                <span><i class="fa-brands fa-instagram"></i></span>
-                <span th:data-test="|toInstaMember_username=${likeablePerson.toInstaMember.username}|"
-                      th:text="${likeablePerson.toInstaMember.username}"></span>
-              </h2>
-              <a th:href="|https://instagram.com/${likeablePerson.toInstaMember.username}|"
-                 target="_blank" class="block text-sm break-all text-blue-400 underline">
-                <span>https://instagram.com/</span><span class="text-red-400"
-                                                         th:text="${likeablePerson.toInstaMember.username}"></span>
-              </a>
-
-              <div class="mt-4 mb-2 flex flex-col gap-2">
-                <div>
-                  <i class="fa-regular fa-clock"></i>
-                  호감표시
-                </div>
-                <div class="mt-2">
-                                    <span class="badge badge-primary"
-                                          th:text="${#temporals.format(likeablePerson.createDate, 'yy.MM.dd HH:mm')}"></span>
-                </div>
-              </div>
-
-              <div class="mt-4 mb-2 flex flex-col gap-2">
-                <div>
-                  <i class="fa-solid fa-check"></i>
-                  호감사유
-                </div>
-                <div class="badge badge-primary"
-                     th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
-                     th:utext="${likeablePerson.attractiveTypeDisplayNameWithIcon}"></div>
-              </div>
-
-              <div class="mt-4 mb-2 flex flex-col gap-2">
-                <div>
-                  <i class="fa-regular fa-face-laugh-beam"></i>
-                  상대방에게 보여지는 내 사진
-                </div>
-                <svg th:data-jdenticon-value="|${likeablePerson.jdenticon}|" width="120"
-                     height="120"></svg>
-              </div>
-
-              <div class="card-actions justify-center">
-                <a th:href="@{|modify/${likeablePerson.id}|}" class="btn btn-sm btn-outline">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                  &nbsp;
-                  호감사유 변경
-                </a>
-                <a class="btn btn-sm btn-outline" href="javascript:;"
-                   onclick="if ( confirm('정말로 취소하시겠습니까?') ) $(this).next().submit();">
-                  <i class="fa-solid fa-user-slash"></i>
-                  &nbsp;
-                  호감취소
-                </a>
-                <form hidden th:action="@{|/likeablePerson/${likeablePerson.id}|}" method="POST">
-                  <input type="hidden" name="_method" value="delete">
-                </form>
-              </div>
+    <div class="flex flex-col gap-4">
+      <div class="card bg-base-100 shadow-xl" th:each="notification : ${notifications}">
+        <div class="card-body">
+          <div class="flex flex-col gap-2">
+            <div>
+              <i class="fa-regular fa-clock"></i>
+              알림
+            </div>
+            <div>
+                            <span class="badge badge-primary">
+                                <span th:text="${#temporals.format(notification.createDate, 'yy.MM.dd HH:mm')}"></span>
+                                <span>, <span th:text="${notification.createDateAfterStrHuman}"></span></span>
+                            </span>
+              <i th:if="${notification.isHot()}" class="fa-solid fa-fire text-red-500"></i>
             </div>
           </div>
-        </li>
-      </ul>
-    </th:block>
-
-    <div class="text-center mt-4">
-      <a th:if="${@rq.member.hasConnectedInstaMember}" href="like" class="btn btn-link">호감표시</a>
-      <a th:if="${@rq.member.hasConnectedInstaMember}" href="/member/me" class="btn btn-link">내 정보</a>
+          <div class="mt-4 flex flex-col gap-2">
+            <div>
+              <i class="fa-regular fa-message"></i>
+              내용
+            </div>
+            <div th:if="${notification.typeCode == 'LIKE'}">
+              어떤 <span class="badge badge-primary" th:text="${notification.newGenderDisplayName}"></span>이
+              당신을 <span
+                    class="badge badge-primary"
+                    th:text="${notification.newAttractiveTypeDisplayName}">외모</span> 때문에 좋아합니다.
+            </div>
+            <div th:if="${notification.typeCode == 'MODIFY_ATTRACTIVE_TYPE'}">
+              어떤
+              <span class="badge badge-primary" th:text="${notification.newGenderDisplayName}"></span>이
+              당신에 대한 호감사유를 <span
+                    class="badge badge-primary"
+                    th:text="${notification.oldAttractiveTypeDisplayName}"></span>에서 <span
+                    class="badge badge-primary"
+                    th:text="${notification.newAttractiveTypeDisplayName}"></span>(으)로
+              변경했습니다.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 </main>
 </body>
 
