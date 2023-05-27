@@ -23,8 +23,8 @@
 <!--                        </li>-->
                     <li th:if="${@rq.admin}"><a href="/adm/home/main"><i class="fa-solid fa-gauge"></i> 관리자 페이지</a>
                     </li>
-                    <li th:if="${@rq.login}"><a href="/member/pop"><i class="fa-solid fa-chart-line"></i> 내 인기</a>
-                    </li>
+<!--                    <li th:if="${@rq.login}"><a href="/member/pop"><i class="fa-solid fa-chart-line"></i> 내 인기</a>-->
+<!--                    </li>-->
                     <li th:if="${@rq.login}">
                         <a href="/likeablePerson/toList">
                             <i class="fa-solid fa-list-ul"></i> 내가 받은 호감
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <div th:if="${@rq.login}" class="divider"></div>
-                    <li><a href="/usr/home/about"><i class="fa-solid fa-circle-info"></i> 그램그램이란?</a>
+                    <li><a href="/usr/home/about"><i class="fa-solid fa-circle-info"></i> YOULIKE란?</a>
                     </li>
                     <li th:if="${@rq.login}">
                         <a href="javascript:" onclick="$(this).next().submit();">
@@ -57,9 +57,9 @@
         <div class="navbar-center">
             <a href="/" class="btn btn-ghost normal-case text-xl">
                 <span class="hidden min-[341px]:inline">
-                    gram
-                    <i class="fa-solid fa-heart text-red-300"></i>
-                    gram
+                    YOU
+                    💕
+                    LIKE
                 </span>
                 <span class="min-[341px]:hidden">gg</span>
                 &nbsp;
