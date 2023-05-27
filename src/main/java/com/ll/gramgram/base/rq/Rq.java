@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.Date;
+import java.util.Map;
 
 @Component
 @RequestScope
@@ -138,5 +139,11 @@ public class Rq {
 
     public void removeSessionAttr(String name) {
         session.removeAttribute(name);
+    }
+
+    public String getParamsJsonStr() {
+        Map<String, String[]> parameterMap = req.getParameterMap();
+
+        return Ut.json.toStr(parameterMap);
     }
 }

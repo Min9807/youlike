@@ -1,0 +1,178 @@
+<html layout:decorate="~{usr/layout/layout.html}">
+
+<head>
+    <title>당신을 좋아하는 사람들</title>
+</head>
+
+<body>
+
+<main layout:fragment="main" class="flex-grow flex items-center justify-center">
+    <div class="max-w-2xl w-full px-4">
+        <div th:unless="${@rq.member.hasConnectedInstaMember}" th:include="usr/part/needToConnect::base"></div>
+
+        <th:block th:if="${@rq.member.hasConnectedInstaMember}">
+            <div th:unless="${!#lists.isEmpty(likeablePeople)}" class="text-center">
+                <div><i class="fa-regular fa-face-laugh"></i> 목록이 비어있습니다. 당신이 받은 호감을 보여줍니다.</div>
+            </div>
+
+            <h1 class="mb-4" th:if="${!#lists.isEmpty(likeablePeople)}">
+                <i class="fa-solid fa-list-ol"></i>
+                당신을 좋아하는 사람들
+            </h1>
+
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <form class="flex flex-col gap-6">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">
+                                    <i class="fa-solid fa-person-half-dress"></i>
+                                    성별
+                                </span>
+                            </label>
+                            <select name="gender" class="select select-bordered w-full"
+                                    onchange="$(this).closest('form').submit();">
+                                <option value="">전체</option>
+                                <option value="M">남성</option>
+                                <option value="W">여성</option>
+                            </select>
+                            <script>
+                                if (params.gender) {
+                                    $(`select[name="gender"]:last`).val(params.gender[0]);
+                                }
+                            </script>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">
+                                    <i class="fa-solid fa-check"></i>
+                                    호감사유
+                                </span>
+                            </label>
+                            <select name="attractiveTypeCode" class="select select-bordered w-full"
+                                    onchange="$(this).closest('form').submit();">
+                                <option value="">전체</option>
+                                <option value="1">외모</option>
+                                <option value="2">성격</option>
+                                <option value="3">능력</option>
+                            </select>
+                            <script>
+                                if (params.attractiveTypeCode) {
+                                    $(`select[name="attractiveTypeCode"]:last`).val(params.attractiveTypeCode[0]);
+                                }
+                            </script>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">
+                                    <i class="fa-solid fa-arrow-up-z-a"></i>
+                                    정렬
+                                </span>
+                            </label>
+                            <select name="sortCode" class="select select-bordered w-full"
+                                    onchange="$(this).closest('form').submit();">
+                                <option value="1">최신순</option>
+                                <option value="2">날짜순</option>
+                                <option value="3">인기 많은 순</option>
+                                <option value="4">인기 적은 순</option>
+                                <option value="5">성별순</option>
+                                <option value="6">호감사유순</option>
+                            </select>
+                            <script>
+                                if (params.sortCode) {
+                                    $(`select[name="sortCode"]:last`).val(params.sortCode[0]);
+                                }
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <ul th:if="${!#lists.isEmpty(likeablePeople)}" class="flex flex-col gap-4 mt-4">
+                <li th:each="likeablePerson: ${likeablePeople}">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <div class="mt-4 mb-2 flex flex-col gap-2">
+                                <div>
+                                    <i class="fa-solid fa-heart"></i>
+                                    번호
+                                </div>
+                                <span class="badge badge-primary"
+                                      th:text="|${likeablePerson.id}번|"></span>
+                            </div>
+
+                            <div class="mt-4 mb-2 flex flex-col gap-2">
+                                <div>
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    인기
+                                </div>
+                                <span class="badge badge-primary"
+                                      th:text="|${#numbers.formatInteger(likeablePerson.fromInstaMember.likes, 0, 'COMMA')}|"></span>
+                            </div>
+
+                            <div class="mt-4 mb-2 flex flex-col gap-2">
+                                <div>
+                                    <i class="fa-regular fa-face-laugh-beam"></i>
+                                    호감표시자
+                                </div>
+                                <svg th:data-jdenticon-value="|${likeablePerson.jdenticon}|" width="120"
+                                     height="120"></svg>
+                            </div>
+
+                            <div class="mt-4 mb-2 flex flex-col gap-2">
+                                <div>
+                                    <i class="fa-regular fa-clock"></i>
+                                    호감표시
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge badge-primary"
+                                          th:text="${#temporals.format(likeablePerson.createDate, 'yy.MM.dd HH:mm')}"></span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 mb-2 flex flex-col gap-2">
+                                <div>
+                                    <i class="fa-solid fa-person-half-dress"></i>
+                                    성별
+                                </div>
+                                <div class="badge badge-primary"
+                                     th:data-test="|toInstaMember_genderDisplayName=${likeablePerson.fromInstaMember.genderDisplayName}|"
+                                     th:utext="${likeablePerson.fromInstaMember.genderDisplayNameWithIcon}"></div>
+                            </div>
+
+                            <div class="mt-4 mb-2 flex flex-col gap-2">
+                                <div>
+                                    <i class="fa-solid fa-check"></i>
+                                    호감사유
+                                </div>
+                                <div class="badge badge-primary"
+                                     th:data-test="|toInstaMember_attractiveTypeDisplayName=${likeablePerson.attractiveTypeDisplayName}|"
+                                     th:utext="${likeablePerson.attractiveTypeDisplayNameWithIcon}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </th:block>
+
+        <div class="text-center mt-4">
+            <a th:if="${@rq.member.hasConnectedInstaMember}" href="add" class="btn btn-link">
+                <span>
+                    <i class="fa-solid fa-heart-circle-plus"></i>
+                    호감표시&nbsp;
+                </span>
+            </a>
+            <a th:if="${@rq.member.hasConnectedInstaMember}" href="/usr/member/me" class="btn btn-link">
+                <span>
+                    <i class="fa-solid fa-user mr-1"></i>
+                    내 정보&nbsp;
+                </span>
+            </a>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

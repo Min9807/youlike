@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="/resource/common/common.css">
 
     <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">그램그램</title>
+    <script>
+        // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
+        const params = JSON.parse('[( ${@rq.paramsJsonStr} )]');
+    </script>
 </head>
 
 <body>
