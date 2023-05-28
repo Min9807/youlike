@@ -66,6 +66,9 @@
                     // .keyup(); : 강제로 keyup 이벤트 트리거(이벤트를 강제로 발동시킨다.)
                     $(`input[name="username"]:last`).keyup();
                 </script>
+                <div class="mt-3 text-sm text-gray-500">
+                    한번 입력된 인스타 아이디는 변경할 수 없습니다.
+                </div>
             </div>
 
             <div class="form-control">
@@ -101,6 +104,9 @@
                 <i class="fa-brands fa-instagram"></i>
                 <span>인스타 아이디 입력</span>
             </button>
+            <a href="connectByApi" class="btn btn-link">
+                인스타 인증을 위한 연동하기
+            </a>
         </form>
     </div>
 </main>
