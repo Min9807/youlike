@@ -38,4 +38,19 @@ public class HomeController {
 
         return sb.toString().replaceAll("\n", "<br>");
     }
+
+    @GetMapping("/usr/home/termsOfUse")
+    public String showTermsOfUse() {
+        return "usr/home/termsOfUse";
+    }
+
+    @GetMapping("/usr/home/privacyPolicy")
+    public String showPrivacyPolicy() {
+        return "usr/home/privacyPolicy";
+    }
+
+    @GetMapping("/usr/home/dataDeletion")
+    public String showDataDeletion() {
+        return "usr/home/dataDeletion";
+    }
 }
